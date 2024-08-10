@@ -10,7 +10,7 @@ function Chat() {
     return (
         <>
             {chatDetailId
-                ? <ChatDetail chatID={chatDetailId} />
+                ? <ChatDetail chatID={chatDetailId} setChatDetailId={setChatDetailId} />
                 : <ChatSummary chatSummary={chatSummary} setChatDetailId={setChatDetailId} />
             }
         </>

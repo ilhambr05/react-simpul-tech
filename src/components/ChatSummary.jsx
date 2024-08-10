@@ -1,4 +1,4 @@
-import SearchBar from "./SearchBar";
+import SearchBar from "./UI/SearchBar";
 
 function ChatSummary({ chatSummary, setChatDetailId }) {
     return (

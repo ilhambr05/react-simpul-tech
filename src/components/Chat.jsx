@@ -1,7 +1,7 @@
-import ChatSummary from "./UI/ChatSummary";
+import ChatSummary from "./ChatSummary";
 import dummyChatSummary from "../dummy/chat";
 import { useState } from "react";
-import ChatDetail from "./UI/ChatDetail";
+import ChatDetail from "./ChatDetail";
 
 function Chat() {
     const chatSummary = dummyChatSummary;

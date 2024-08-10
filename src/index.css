@@ -9,18 +9,17 @@
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: theme(colors.primary-grey);
+  /* background: theme(colors.primary-grey); */
   border-radius: 5px;
-  /* margin: 5px 0px; */
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: theme(colors.primary-dark);
+  background: #BDBDBD;
   border-radius: 5px;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: theme(colors.primary-dark-grey);
+  background: theme(colors.primary-grey);
 }

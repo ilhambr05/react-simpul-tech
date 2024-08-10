@@ -1,8 +1,9 @@
-import arrowLeft from '../../assets/icons/UI/arrow-back.png';
-import closeIcon from '../../assets/icons/UI/close-dark.png';
-import dummyChatSummary from "../../dummy/chat";
-import Button from './Button';
-import TypeBar from './TypeBar';
+import arrowLeft from '../assets/icons/UI/arrow-back.png';
+import closeIcon from '../assets/icons/UI/close-dark.png';
+import dummyChatSummary from "../dummy/chat";
+import Button from './UI/Button';
+import ChatBuble from './UI/ChatBuble';
+import TypeBar from './UI/TypeBar';
 
 
 function ChatDetail({ chatID, setChatDetailId }) {
@@ -26,8 +27,21 @@ function ChatDetail({ chatID, setChatDetailId }) {
             </div>
 
             {/* content */}
-            <div className="flex-grow overflow-y-auto">
-                chat?.content?.content
+            <div className="overflow-y-auto">
+                <div className="flex flex-col-reverse justify-items-end flex-grow gap-[5px]">
+                    <ChatBuble>chat?.content?.content</ChatBuble>
+                    <ChatBuble>chat?.content?.content</ChatBuble>
+                    <ChatBuble>chat?.content?.content</ChatBuble>
+                    <ChatBuble>chat?.content?.content</ChatBuble>
+                    <ChatBuble>chat?.content?.content</ChatBuble>
+                    <ChatBuble>chat?.content?.content2</ChatBuble>
+                    <ChatBuble>chat?.content?.content</ChatBuble>
+                    <ChatBuble>chat?.content?.content</ChatBuble>
+                    <ChatBuble>chat?.content?.content</ChatBuble>
+                    <ChatBuble>chat?.content?.content</ChatBuble>
+                    <ChatBuble>chat?.content?.content</ChatBuble>
+                    <ChatBuble>chat?.content?.content2</ChatBuble>
+                </div>
             </div>
 
             {/* footer */}

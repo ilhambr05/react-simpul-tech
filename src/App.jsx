@@ -1,9 +1,9 @@
+import QuickMenu from "./components/QuickMenu"
+
 function App() {
   return (
     <>
-      <h1 className="text-3xl font-bold underline font-lato">
-        Hello world!
-      </h1>
+      <QuickMenu />
     </>
   )
 }

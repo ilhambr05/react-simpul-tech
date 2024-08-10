@@ -1,18 +1,18 @@
-import SearchBar from "./UI/SearchBar";
-
-// import personLogo from "../assets/icons/UI/person.png"
-// import personDarkLogo from "../assets/icons/UI/person-dark.png"
 import ChatSummary from "./UI/ChatSummary";
-import dummyChat from "../dummy/chat";
+import dummyChatSummary from "../dummy/chat";
+import { useState } from "react";
+import ChatDetail from "./UI/ChatDetail";
 
 function Chat() {
-    const chat = dummyChat
+    const chatSummary = dummyChatSummary;
+    const [chatDetailId, setChatDetailId] = useState(0);
+
     return (
         <>
-            <SearchBar />
-            <div className="overflow-y-auto">
-                <ChatSummary chatSummary={chat}/>
-            </div>
+            {chatDetailId
+                ? <ChatDetail chatID={chatDetailId} />
+                : <ChatSummary chatSummary={chatSummary} setChatDetailId={setChatDetailId} />
+            }
         </>
     )
 }

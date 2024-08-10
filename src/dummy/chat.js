@@ -3,6 +3,7 @@ import personDarkLogo from "../assets/icons/UI/person-dark.png"
 
 const chatSummary = [
     {
+        id: 1,
         users: [
             {
                 name: "user 1",
@@ -23,6 +24,7 @@ const chatSummary = [
         }
     },
     {
+        id: 2,
         users: [
             {
                 name: "user 2",
@@ -38,6 +40,7 @@ const chatSummary = [
         }
     },
     {
+        id: 3,
         users: [
             {
                 name: "user 2",
@@ -63,6 +66,7 @@ const chatSummary = [
         }
     },
     {
+        id: 4,
         users: [
             {
                 name: "user 1",
@@ -83,6 +87,7 @@ const chatSummary = [
         }
     },
     {
+        id: 5,
         users: [
             {
                 name: "user 1",
@@ -103,6 +108,7 @@ const chatSummary = [
         }
     },
     {
+        id: 6,
         users: [
             {
                 name: "user 1",
@@ -123,6 +129,7 @@ const chatSummary = [
         }
     },
     {
+        id: 7,
         users: [
             {
                 name: "user 1",
@@ -143,6 +150,7 @@ const chatSummary = [
         }
     },
     {
+        id: 8,
         users: [
             {
                 name: "user 1",

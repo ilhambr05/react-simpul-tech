@@ -1,12 +1,14 @@
 import { useState } from "react";
-import Chat from "./components/Chat"
-import ContentContainer from "./components/ContentContainer"
 // QuickMenu
 import QuickMenu from "./components/QuickMenu"
 import iconTask from './assets/icons/menu/task-icon-inactive.png'
 import iconTaskActive from './assets/icons/menu/task-icon-active.png'
 import iconChat from './assets/icons/menu/chat-icon-inactive.png'
 import iconChatActive from './assets/icons/menu/chat-icon-active.png'
+
+import ContentContainer from "./components/ContentContainer"
+import Chat from "./components/Chat"
+import Task from "./components/Task";
 
 function App() {
   const [menuActiveIndex, setMenuActive] = useState(0);
@@ -25,7 +27,7 @@ function App() {
       icon: iconTask,
       iconActive: iconTaskActive,
       classActive: '!bg-indicator-orange',
-      elementActive: Chat,
+      elementActive: Task,
     },
     // {
     //     id: 3,

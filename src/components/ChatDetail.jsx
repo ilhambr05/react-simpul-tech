@@ -27,21 +27,25 @@ function ChatDetail({ chatID, setChatDetailId }) {
             </div>
 
             {/* content */}
-            <div className="overflow-y-auto">
-                <div className="flex flex-col-reverse justify-items-end flex-grow gap-[5px]">
-                    <ChatBuble>chat?.content?.content</ChatBuble>
-                    <ChatBuble>chat?.content?.content</ChatBuble>
-                    <ChatBuble>chat?.content?.content</ChatBuble>
-                    <ChatBuble>chat?.content?.content</ChatBuble>
-                    <ChatBuble>chat?.content?.content</ChatBuble>
-                    <ChatBuble>chat?.content?.content2</ChatBuble>
-                    <ChatBuble>chat?.content?.content</ChatBuble>
-                    <ChatBuble>chat?.content?.content</ChatBuble>
-                    <ChatBuble>chat?.content?.content</ChatBuble>
-                    <ChatBuble>chat?.content?.content</ChatBuble>
-                    <ChatBuble>chat?.content?.content</ChatBuble>
-                    <ChatBuble>chat?.content?.content2</ChatBuble>
-                </div>
+            <div className="flex flex-col-reverse justify-items-end flex-grow gap-[5px] overflow-y-auto py-[15px]">
+                <ChatBuble>chat?.content?.content</ChatBuble>
+                <ChatBuble>chat?.content?.content</ChatBuble>
+                <ChatBuble>chat?.content?.content</ChatBuble>
+                <ChatBuble>chat?.content?.content</ChatBuble>
+                <ChatBuble>chat?.content?.content</ChatBuble>
+                <ChatBuble>chat?.content?.content2</ChatBuble>
+                <ChatBuble>chat?.content?.content</ChatBuble>
+                <ChatBuble>chat?.content?.content</ChatBuble>
+                <ChatBuble>chat?.content?.content</ChatBuble>
+                <ChatBuble>chat?.content?.content</ChatBuble>
+                <ChatBuble>chat?.content?.content</ChatBuble>
+                <ChatBuble>chat?.content?.content2</ChatBuble>
+                <ChatBuble>chat?.content?.content</ChatBuble>
+                <ChatBuble>chat?.content?.content</ChatBuble>
+                <ChatBuble>chat?.content?.content</ChatBuble>
+                <ChatBuble>chat?.content?.content</ChatBuble>
+                <ChatBuble>chat?.content?.content</ChatBuble>
+                <ChatBuble>chat?.content?.content2</ChatBuble>
             </div>
 
             {/* footer */}

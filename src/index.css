@@ -11,7 +11,7 @@
 ::-webkit-scrollbar-track {
   background: theme(colors.primary-grey);
   border-radius: 5px;
-  margin: 5px 0px;
+  /* margin: 5px 0px; */
 }
 
 /* Handle */

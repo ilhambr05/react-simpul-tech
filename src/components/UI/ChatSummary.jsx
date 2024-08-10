@@ -4,14 +4,14 @@ function ChatSummary({ chatSummary }) {
             {
                 chatSummary.map((summary, index) => {
                     return (
-                        <div key={index} className="flex flex-row py-[22px] gap-[20px] text-[14px] border-b-primary-dark border-b-[1px] border-solid 
-                            last:border-none cursor-pointer">
-                            <div className="flex flex-row w-[50px]">
+                        <div key={index} className="flex flex-row py-[22px] text-[14px] border-b-primary-dark border-b-[1px] border-solid 
+                            last:border-none cursor-pointer hover:bg-primary-light-grey">
+                            <div className="flex flex-row min-w-[50px] overflow-hidden mr-[10px]">
                                 {
                                     summary.users.map((user, index) => {
                                         return (
                                             <div key={user.name + index} className="w-[15px] overflow-visible" title={user.name}>
-                                                <div className={`flex items-center justify-center h-[30px] w-[30px] rounded-full bg-primary-light-grey ${user.styleClass}`}>
+                                                <div className={`flex items-center justify-center h-[30px] w-[30px] rounded-full bg-[#ffffff] !${user.styleClass}`}>
                                                     <img className="w-[12px] h-[12px]" src={user.icon}></img>
                                                 </div>
                                             </div>
@@ -24,7 +24,7 @@ function ChatSummary({ chatSummary }) {
                                     {summary.content.title}
                                 </div>
                                 <div className="font-bold">
-                                    {summary.content.sender}
+                                    {summary.content.sender || "Sender"} :
                                 </div>
                                 <div className="grid">
                                     <div className="truncate">
@@ -32,7 +32,7 @@ function ChatSummary({ chatSummary }) {
                                     </div>
                                 </div>
                             </div>
-                            <div className="min-w-[145px]">{summary.content.dateTime}</div>
+                            <div className="min-w-[145px] ml-[20px]">{summary.content.dateTime}</div>
                         </div>
                     )
                 })

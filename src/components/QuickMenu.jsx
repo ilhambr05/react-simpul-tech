@@ -65,7 +65,7 @@ function QuickMenu() {
                             return (
                                 <div className={`flex items-center justify-center h-[60px] w-[60px] cursor-pointer bg-[#ffffff]
                                     bg-white absolute top-[4px] right-0 rounded-full transition-all duration-200 
-                                    group-[.is-collapsed]:!right-0 ${isMenuActive ? item.classActive : ''}`} key={index} style={{ right: rightOffset }}
+                                    group-[.is-collapsed]:!right-0 ${isMenuActive ? item.classActive + " z-[1]" : ''}`} key={index} style={{ right: rightOffset }}
                                     onClick={() => setMenuActive(item.id)} title={item.name}>
                                     <img src={isMenuActive ? item.iconActive : item.icon}></img>
                                 </div>

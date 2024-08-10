@@ -1,42 +1,16 @@
 import iconMenuToggler from '../assets/icons/menu/menu-icon.png'
-import iconTask from '../assets/icons/menu/task-icon-inactive.png'
-import iconTaskActive from '../assets/icons/menu/task-icon-active.png'
-import iconChat from '../assets/icons/menu/chat-icon-inactive.png'
-import iconChatActive from '../assets/icons/menu/chat-icon-active.png'
 import { useState } from 'react'
 
-const menuItems = [
-    {
-        id: 1,
-        name: 'Chat',
-        icon: iconChat,
-        iconActive: iconChatActive,
-        classActive: '!bg-indicator-purple'
-    },
-    {
-        id: 2,
-        name: 'Task',
-        icon: iconTask,
-        iconActive: iconTaskActive,
-        classActive: '!bg-indicator-orange'
-    },
-    // {
-    //     id: 3,
-    //     name: 'Other',
-    //     icon: iconTask,
-    //     iconActive: iconTaskActive,
-    //     classActive: 'bg-indicator-orange'
-    // }
-];
 
-function QuickMenu() {
+
+function QuickMenu({setMenuActive, menuActiveIndex, menuItems}) {
     const menuItemDistanceToToggler = 90;
     const menuItemWidth = 60;
     const menuItemGap = 20;
     let inactiveMenuCounter = 0;
 
     const [menuExpanded, setMenuExpanded] = useState(false);
-    const [menuActiveIndex, setMenuActive] = useState(0);
+    // const [menuActiveIndex, setMenuActive] = useState(0);
 
     function handleExpandMenu() {
         setMenuExpanded(!menuExpanded);

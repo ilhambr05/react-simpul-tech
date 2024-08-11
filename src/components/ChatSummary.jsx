@@ -13,7 +13,7 @@ function ChatSummary({ chatSummary, setChatDetailId }) {
                                 onClick={() => setChatDetailId(summary.id)}>
                                 <div className="flex flex-row min-w-[50px] overflow-hidden mr-[10px]">
                                     {
-                                        summary.users.map((user, index) => {
+                                        summary.participants.map((user, index) => {
                                             return (
                                                 <div key={user.name + index} className="w-[15px] overflow-visible" title={user.name}>
                                                     <div className={`flex items-center justify-center h-[30px] w-[30px] rounded-full ${user.styleClass || "bg-[#ffffff]"}`}>

@@ -6,11 +6,36 @@ import Button from './UI/Button';
 import ChatBubble from './UI/ChatBubble';
 import TypeBar from './UI/TypeBar';
 
+function generateParticipantsColorData(participants) {
+    let generatedParticipantsData = {};
+    const yourUserID = 111;
 
+    // purple is reserved for you
+    const textColors = [
+        'text-chat-yellow-darker',
+        'text-chat-green-darker',
+    ]
+    const bubbleColors = [
+        'bg-chat-yellow',
+        'bg-chat-green',
+    ]
+
+    participants.forEach((user, index) => {
+        const isItYou = user.userID === yourUserID;
+
+        user['textColor'] = isItYou ? "text-chat-purple-darker" : textColors[index];
+        user['bubbleColor'] = isItYou ? "bg-chat-purple" : bubbleColors[index];
+        generatedParticipantsData[user.userID] = user;
+    });
+
+    return generatedParticipantsData;
+}
 function ChatDetail({ chatID, setChatDetailId }) {
     const chat = dummyChatSummary.find((chat) => chat.id === chatID);
-    const participantNumber = chat?.users.length || 0;
+    const participantNumber = chat?.participants.length || 0;
+    const participantsData = generateParticipantsColorData(chat.participants);
 
+    console.log(participantsData);
     return (
         <>
             <div className='flex flex-row gap-[20px] -mx-[32px] px-[32px] pb-[24px] border-b-2 border-solid border-b-primary-light-grey'>
@@ -32,7 +57,7 @@ function ChatDetail({ chatID, setChatDetailId }) {
                 {
                     dummyChatDetail.map((chat, index) => {
                         return (
-                            <ChatBubble key={index} chatData={chat}>{chat.content}</ChatBubble>
+                            <ChatBubble key={`${index}-${chat.id}`} chatData={chat} participantsData={participantsData}>{chat.content}</ChatBubble>
                         )
                     })
                 }

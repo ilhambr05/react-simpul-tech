@@ -4,18 +4,24 @@ import personDarkLogo from "../assets/icons/UI/person-dark.png"
 const chatSummary = [
     {
         id: 1,
-        users: [
+        participants: [
             {
                 userID: 1,
-                name: "user 1",
+                name: "John Doe",
                 icon: personLogo,
                 styleClass: "bg-primary-blue",
             },
             {
                 userID: 2,
-                name: "user 2",
+                name: "Jane Smith",
                 icon: personDarkLogo,
                 styleClass: "bg-primary-light-grey",
+            },
+            {
+                userID: 111,
+                name: "Ilham",
+                icon: personDarkLogo,
+                styleClass: "bg-indicator-orange",
             },
         ],
         content: {
@@ -27,12 +33,18 @@ const chatSummary = [
     },
     {
         id: 2,
-        users: [
+        participants: [
             {
                 userID: 2,
-                name: "user 2",
+                name: "Jane Smith",
                 icon: personLogo,
                 styleClass: "bg-primary-blue",
+            },
+            {
+                userID: 111,
+                name: "ilham",
+                icon: personLogo,
+                styleClass: "bg-indicator-orange",
             }
         ],
         content: {
@@ -44,22 +56,22 @@ const chatSummary = [
     },
     {
         id: 3,
-        users: [
+        participants: [
             {
                 userID: 2,
-                name: "user 2",
+                name: "Jane Smith",
                 icon: personLogo,
                 styleClass: "bg-primary-blue",
             },
             {
                 userID: 2,
-                name: "user 2",
+                name: "Jane Smith",
                 icon: personDarkLogo,
                 styleClass: "",
             },
             {
                 userID: 2,
-                name: "user 2",
+                name: "Jane Smith",
                 icon: personLogo,
                 styleClass: "bg-primary-light-grey",
             },
@@ -73,16 +85,16 @@ const chatSummary = [
     },
     {
         id: 4,
-        users: [
+        participants: [
             {
                 userID: 1,
-                name: "user 1",
+                name: "John Doe",
                 icon: personLogo,
                 styleClass: "bg-primary-blue",
             },
             {
                 userID: 2,
-                name: "user 2",
+                name: "Jane Smith",
                 icon: personDarkLogo,
                 styleClass: "bg-primary-light-grey",
             },
@@ -96,16 +108,16 @@ const chatSummary = [
     },
     {
         id: 5,
-        users: [
+        participants: [
             {
                 userID: 1,
-                name: "user 1",
+                name: "John Doe",
                 icon: personLogo,
                 styleClass: "bg-primary-blue",
             },
             {
                 userID: 2,
-                name: "user 2",
+                name: "Jane Smith",
                 icon: personDarkLogo,
                 styleClass: "bg-primary-light-grey",
             },
@@ -119,16 +131,16 @@ const chatSummary = [
     },
     {
         id: 6,
-        users: [
+        participants: [
             {
                 userID: 1,
-                name: "user 1",
+                name: "John Doe",
                 icon: personLogo,
                 styleClass: "bg-primary-blue",
             },
             {
                 userID: 2,
-                name: "user 2",
+                name: "Jane Smith",
                 icon: personDarkLogo,
                 styleClass: "bg-primary-light-grey",
             },
@@ -142,16 +154,16 @@ const chatSummary = [
     },
     {
         id: 7,
-        users: [
+        participants: [
             {
                 userID: 1,
-                name: "user 1",
+                name: "John Doe",
                 icon: personLogo,
                 styleClass: "bg-primary-blue",
             },
             {
                 userID: 2,
-                name: "user 2",
+                name: "Jane Smith",
                 icon: personDarkLogo,
                 styleClass: "bg-primary-light-grey",
             },
@@ -165,16 +177,16 @@ const chatSummary = [
     },
     {
         id: 8,
-        users: [
+        participants: [
             {
                 userID: 1,
-                name: "user 1",
+                name: "John Doe",
                 icon: personLogo,
                 styleClass: "bg-primary-blue",
             },
             {
                 userID: 2,
-                name: "user 2",
+                name: "Jane Smith",
                 icon: personDarkLogo,
                 styleClass: "bg-primary-light-grey",
             },

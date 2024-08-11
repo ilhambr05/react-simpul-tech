@@ -20,7 +20,13 @@ export default {
       "primary-grey": "#828282",
       "primary-light-grey": "#E0E0E0",
       "indicator-orange": "#F8B76B",
-      "indicator-purple": "#8785FF"
+      "indicator-purple": "#8785FF",
+      "chat-yellow": "#FCEED3",
+      "chat-yellow-darker": "#E5A443",
+      "chat-purple": "#EEDCFF",
+      "chat-purple-darker": "#9B51E0",
+      "chat-green": "#D2F2EA",
+      "chat-green-darker": "#43B78D"
     }
   },
   plugins: [],

@@ -5,10 +5,10 @@ function ChatBubble({ chatData, participantsData, children }) {
     const isItYou = chatData?.senderID === yourUserID;
     const chatColor = participantsData[chatData?.senderID]?.textColor;
     const chatBubbleColor = participantsData[chatData?.senderID]?.bubbleColor;
-    console.log(chatColor);
 
     return (
         <>
+            {/* {divider ? <ChatDivider>{divider}</ChatDivider> : ''} */}
             {/* items-end/items-start */}
             <div className={`flex flex-col gap-[5px] text-[14px] ${isItYou ? " items-end" : " items-start"}`}>
                 <div className={`font-bold text-chat-green-dark ${chatColor}`}>

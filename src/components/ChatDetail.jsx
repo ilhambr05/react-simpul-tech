@@ -1,3 +1,4 @@
+import { useRef } from 'react';
 import arrowLeft from '../assets/icons/UI/arrow-back.png';
 import closeIcon from '../assets/icons/UI/close-dark.png';
 import dummyChatSummary from "../dummy/chat";
@@ -32,26 +33,43 @@ function generateParticipantsColorData(participants) {
     return generatedParticipantsData;
 }
 
-function myfunction(value, parentRef) {
-    const item = value.getBoundingClientRect();
-    return (
-        item.top >= 0 &&
-        item.left >= 0 &&
-        item.bottom <= (
-            window.innerHeight ||
-            document.documentElement.clientHeight) &&
-        item.right <= (
-            window.innerWidth ||
-            document.documentElement.clientWidth)
-    );
+function checkVisibility(elementRef, parentNode) {
+    // console.log(elementRef.current)
+    const el = elementRef.current.getBoundingClientRect();
+    // const parentNode = parentRef.current;
+
+    console.log({ parentTop: parentNode, elTop: el.top, elBottom: el.bottom });
+    // return (
+    //     el.top >= 0 &&
+    //     el.bottom <= (
+    //         parentNode.innerHeight
+    //         // || document.documentElement.clientHeight
+    //     )
+    // );
 }
 
 function ChatDetail({ chatID, setChatDetailId }) {
     const chat = dummyChatSummary.find((chat) => chat.id === chatID);
     const participantNumber = chat?.participants.length || 0;
     const participantsData = generateParticipantsColorData(chat.participants);
+    let chatDateDivider = new Date(dummyChatDetail.messages[0].timestamp).toDateString();
 
-    console.log(participantsData);
+    // const chatContainerRef = useRef();
+    const newMessagesNotifRef = useRef();
+
+    function checkNotifVisible(event) {
+        // console.log(newMessagesNotifRef)
+        // console.log(checkVisibility(newMessagesNotifRef, event?.target));
+        // console.log("scrolled")
+    }
+
+    dummyChatDetail.messages.forEach((item, index) => {
+        const date = new Date(`${item.date} ${item.time}`);
+        item.timestamp = date.getTime();
+    });
+
+    console.log(JSON.stringify(dummyChatDetail.messages))
+
     return (
         <>
             <div className='flex flex-row gap-[20px] -mx-[32px] px-[32px] pb-[24px] border-b-2 border-solid border-b-primary-light-grey'>
@@ -69,14 +87,28 @@ function ChatDetail({ chatID, setChatDetailId }) {
             </div>
 
             {/* content */}
-            <div className="flex flex-col-reverse justify-items-end flex-grow gap-[8px] overflow-y-auto py-[15px]" onScroll={() => { }}>
+            <div className="flex flex-col-reverse justify-items-end flex-grow gap-[8px] overflow-y-auto py-[15px]" onScroll={checkNotifVisible}>
+                <ChatDivider ref={newMessagesNotifRef} variant="red" >New Message</ChatDivider>
+                {/* <ChatDivider>Today, 01 January 2024</ChatDivider> */}
                 {
-                    dummyChatDetail.map((chat, index) => {
+                    dummyChatDetail.messages.map((chat, index) => {
+                        const newChatDateDivider = new Date(chat.timestamp).toDateString();
+                        const isDateChanged = newChatDateDivider !== chatDateDivider;
+                        let dateDividerComponent = null;
+
+                        if (isDateChanged) {
+                            dateDividerComponent = <ChatDivider key={dateDividerComponent}>{chatDateDivider}</ChatDivider>;
+                            chatDateDivider = newChatDateDivider;
+                        }
                         return (
-                            <ChatBubble key={`${index}-${chat.id}`} chatData={chat} participantsData={participantsData}>{chat.content}</ChatBubble>
-                        )
+                            <div key={index}>
+                                <ChatBubble key={`${index}-${chat.id}`} chatData={chat} participantsData={participantsData}>{chat.content}</ChatBubble>
+                                {dateDividerComponent}
+                            </div>
+                        );
                     })
                 }
+                <ChatDivider>{chatDateDivider}</ChatDivider>
                 {/* <ChatBubble>chat?.content?.content</ChatBubble>
                 <ChatBubble>chat?.content?.content</ChatBubble>
                 <ChatBubble>chat?.content?.content</ChatBubble>
@@ -95,8 +127,6 @@ function ChatDetail({ chatID, setChatDetailId }) {
                 <ChatBubble>chat?.content?.content</ChatBubble>
                 <ChatBubble>chat?.content?.content</ChatBubble>
                 <ChatBubble>chat?.content?.content2</ChatBubble> */}
-                <ChatDivider>Today, 01 January 2024</ChatDivider>
-                <ChatDivider variant="red">New Message</ChatDivider>
             </div>
 
             {/* footer */}

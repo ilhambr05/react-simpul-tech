@@ -1,8 +1,9 @@
 import arrowLeft from '../assets/icons/UI/arrow-back.png';
 import closeIcon from '../assets/icons/UI/close-dark.png';
 import dummyChatSummary from "../dummy/chat";
+import dummyChatDetail from "../dummy/chatDetail1";
 import Button from './UI/Button';
-import ChatBuble from './UI/ChatBuble';
+import ChatBubble from './UI/ChatBubble';
 import TypeBar from './UI/TypeBar';
 
 
@@ -27,25 +28,32 @@ function ChatDetail({ chatID, setChatDetailId }) {
             </div>
 
             {/* content */}
-            <div className="flex flex-col-reverse justify-items-end flex-grow gap-[5px] overflow-y-auto py-[15px]">
-                <ChatBuble>chat?.content?.content</ChatBuble>
-                <ChatBuble>chat?.content?.content</ChatBuble>
-                <ChatBuble>chat?.content?.content</ChatBuble>
-                <ChatBuble>chat?.content?.content</ChatBuble>
-                <ChatBuble>chat?.content?.content</ChatBuble>
-                <ChatBuble>chat?.content?.content2</ChatBuble>
-                <ChatBuble>chat?.content?.content</ChatBuble>
-                <ChatBuble>chat?.content?.content</ChatBuble>
-                <ChatBuble>chat?.content?.content</ChatBuble>
-                <ChatBuble>chat?.content?.content</ChatBuble>
-                <ChatBuble>chat?.content?.content</ChatBuble>
-                <ChatBuble>chat?.content?.content2</ChatBuble>
-                <ChatBuble>chat?.content?.content</ChatBuble>
-                <ChatBuble>chat?.content?.content</ChatBuble>
-                <ChatBuble>chat?.content?.content</ChatBuble>
-                <ChatBuble>chat?.content?.content</ChatBuble>
-                <ChatBuble>chat?.content?.content</ChatBuble>
-                <ChatBuble>chat?.content?.content2</ChatBuble>
+            <div className="flex flex-col-reverse justify-items-end flex-grow gap-[8px] overflow-y-auto py-[15px]">
+                {
+                    dummyChatDetail.map((chat, index) => {
+                        return (
+                            <ChatBubble key={index} chatData={chat}>{chat.content}</ChatBubble>
+                        )
+                    })
+                }
+                {/* <ChatBubble>chat?.content?.content</ChatBubble>
+                <ChatBubble>chat?.content?.content</ChatBubble>
+                <ChatBubble>chat?.content?.content</ChatBubble>
+                <ChatBubble>chat?.content?.content</ChatBubble>
+                <ChatBubble>chat?.content?.content</ChatBubble>
+                <ChatBubble>chat?.content?.content2</ChatBubble>
+                <ChatBubble>chat?.content?.content</ChatBubble>
+                <ChatBubble>chat?.content?.content</ChatBubble>
+                <ChatBubble>chat?.content?.content</ChatBubble>
+                <ChatBubble>chat?.content?.content</ChatBubble>
+                <ChatBubble>chat?.content?.content</ChatBubble>
+                <ChatBubble>chat?.content?.content2</ChatBubble>
+                <ChatBubble>chat?.content?.content</ChatBubble>
+                <ChatBubble>chat?.content?.content</ChatBubble>
+                <ChatBubble>chat?.content?.content</ChatBubble>
+                <ChatBubble>chat?.content?.content</ChatBubble>
+                <ChatBubble>chat?.content?.content</ChatBubble>
+                <ChatBubble>chat?.content?.content2</ChatBubble> */}
             </div>
 
             {/* footer */}

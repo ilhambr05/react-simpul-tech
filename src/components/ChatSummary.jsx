@@ -16,7 +16,7 @@ function ChatSummary({ chatSummary, setChatDetailId }) {
                                         summary.users.map((user, index) => {
                                             return (
                                                 <div key={user.name + index} className="w-[15px] overflow-visible" title={user.name}>
-                                                    <div className={`flex items-center justify-center h-[30px] w-[30px] rounded-full bg-[#ffffff] !${user.styleClass}`}>
+                                                    <div className={`flex items-center justify-center h-[30px] w-[30px] rounded-full ${user.styleClass || "bg-[#ffffff]"}`}>
                                                         <img className="w-[12px] h-[12px]" src={user.icon}></img>
                                                     </div>
                                                 </div>

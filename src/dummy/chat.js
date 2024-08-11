@@ -6,11 +6,13 @@ const chatSummary = [
         id: 1,
         users: [
             {
+                userID: 1,
                 name: "user 1",
                 icon: personLogo,
                 styleClass: "bg-primary-blue",
             },
             {
+                userID: 2,
                 name: "user 2",
                 icon: personDarkLogo,
                 styleClass: "bg-primary-light-grey",
@@ -27,6 +29,7 @@ const chatSummary = [
         id: 2,
         users: [
             {
+                userID: 2,
                 name: "user 2",
                 icon: personLogo,
                 styleClass: "bg-primary-blue",
@@ -43,16 +46,19 @@ const chatSummary = [
         id: 3,
         users: [
             {
+                userID: 2,
                 name: "user 2",
                 icon: personLogo,
                 styleClass: "bg-primary-blue",
             },
             {
+                userID: 2,
                 name: "user 2",
                 icon: personDarkLogo,
                 styleClass: "",
             },
             {
+                userID: 2,
                 name: "user 2",
                 icon: personLogo,
                 styleClass: "bg-primary-light-grey",
@@ -69,11 +75,13 @@ const chatSummary = [
         id: 4,
         users: [
             {
+                userID: 1,
                 name: "user 1",
                 icon: personLogo,
                 styleClass: "bg-primary-blue",
             },
             {
+                userID: 2,
                 name: "user 2",
                 icon: personDarkLogo,
                 styleClass: "bg-primary-light-grey",
@@ -90,11 +98,13 @@ const chatSummary = [
         id: 5,
         users: [
             {
+                userID: 1,
                 name: "user 1",
                 icon: personLogo,
                 styleClass: "bg-primary-blue",
             },
             {
+                userID: 2,
                 name: "user 2",
                 icon: personDarkLogo,
                 styleClass: "bg-primary-light-grey",
@@ -111,11 +121,13 @@ const chatSummary = [
         id: 6,
         users: [
             {
+                userID: 1,
                 name: "user 1",
                 icon: personLogo,
                 styleClass: "bg-primary-blue",
             },
             {
+                userID: 2,
                 name: "user 2",
                 icon: personDarkLogo,
                 styleClass: "bg-primary-light-grey",
@@ -132,11 +144,13 @@ const chatSummary = [
         id: 7,
         users: [
             {
+                userID: 1,
                 name: "user 1",
                 icon: personLogo,
                 styleClass: "bg-primary-blue",
             },
             {
+                userID: 2,
                 name: "user 2",
                 icon: personDarkLogo,
                 styleClass: "bg-primary-light-grey",
@@ -153,11 +167,13 @@ const chatSummary = [
         id: 8,
         users: [
             {
+                userID: 1,
                 name: "user 1",
                 icon: personLogo,
                 styleClass: "bg-primary-blue",
             },
             {
+                userID: 2,
                 name: "user 2",
                 icon: personDarkLogo,
                 styleClass: "bg-primary-light-grey",

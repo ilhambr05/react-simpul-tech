@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import arrowLeft from '../assets/icons/UI/arrow-back.png';
 import closeIcon from '../assets/icons/UI/close-dark.png';
 import dummyChatSummary from "../dummy/chat";
@@ -7,6 +7,7 @@ import Button from './UI/Button';
 import ChatBubble from './UI/ChatBubble';
 import ChatDivider from './UI/chatDivider';
 import TypeBar from './UI/TypeBar';
+import Connecting from './UI/Connecting';
 
 function generateParticipantsColorData(participants) {
     let generatedParticipantsData = {};
@@ -52,6 +53,16 @@ function ChatDetail({ chatID, setChatDetailId }) {
     const chat = dummyChatSummary.find((chat) => chat.id === chatID);
     const participantNumber = chat?.participants.length || 0;
     const participantsData = generateParticipantsColorData(chat.participants);
+
+    const [isConnecting, setIsConnecting] = useState(true);
+
+    useEffect(() => {
+        setIsConnecting(true);
+        setTimeout(() => {
+            setIsConnecting(false);
+        }, 1000);
+    }, []);
+
     let chatDateDivider = new Date(dummyChatDetail.messages[0].timestamp).toDateString();
 
     // const chatContainerRef = useRef();
@@ -128,6 +139,11 @@ function ChatDetail({ chatID, setChatDetailId }) {
                 <ChatBubble>chat?.content?.content</ChatBubble>
                 <ChatBubble>chat?.content?.content2</ChatBubble> */}
             </div>
+            
+            {
+                isConnecting &&
+                <Connecting>Please wait while we connect you with one of our team ...</Connecting>
+            }
 
             {/* footer */}
             <div className="flex flex-row gap-[15px]" >

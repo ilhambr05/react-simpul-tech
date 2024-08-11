@@ -20,7 +20,7 @@ const chatSummary = [
             {
                 userID: 111,
                 name: "Ilham",
-                icon: personDarkLogo,
+                icon: personLogo,
                 styleClass: "bg-indicator-orange",
             },
         ],

@@ -21,6 +21,7 @@ export default {
       "primary-light-grey": "#E0E0E0",
       "indicator-orange": "#F8B76B",
       "indicator-purple": "#8785FF",
+      "indicator-red": "#EB5757",
       "chat-yellow": "#FCEED3",
       "chat-yellow-darker": "#E5A443",
       "chat-purple": "#EEDCFF",

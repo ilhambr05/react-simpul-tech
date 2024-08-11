@@ -4,6 +4,7 @@ import dummyChatSummary from "../dummy/chat";
 import dummyChatDetail from "../dummy/chatDetail1";
 import Button from './UI/Button';
 import ChatBubble from './UI/ChatBubble';
+import ChatDivider from './UI/chatDivider';
 import TypeBar from './UI/TypeBar';
 
 function generateParticipantsColorData(participants) {
@@ -30,6 +31,21 @@ function generateParticipantsColorData(participants) {
 
     return generatedParticipantsData;
 }
+
+function myfunction(value, parentRef) {
+    const item = value.getBoundingClientRect();
+    return (
+        item.top >= 0 &&
+        item.left >= 0 &&
+        item.bottom <= (
+            window.innerHeight ||
+            document.documentElement.clientHeight) &&
+        item.right <= (
+            window.innerWidth ||
+            document.documentElement.clientWidth)
+    );
+}
+
 function ChatDetail({ chatID, setChatDetailId }) {
     const chat = dummyChatSummary.find((chat) => chat.id === chatID);
     const participantNumber = chat?.participants.length || 0;
@@ -53,7 +69,7 @@ function ChatDetail({ chatID, setChatDetailId }) {
             </div>
 
             {/* content */}
-            <div className="flex flex-col-reverse justify-items-end flex-grow gap-[8px] overflow-y-auto py-[15px]">
+            <div className="flex flex-col-reverse justify-items-end flex-grow gap-[8px] overflow-y-auto py-[15px]" onScroll={() => { }}>
                 {
                     dummyChatDetail.map((chat, index) => {
                         return (
@@ -79,10 +95,12 @@ function ChatDetail({ chatID, setChatDetailId }) {
                 <ChatBubble>chat?.content?.content</ChatBubble>
                 <ChatBubble>chat?.content?.content</ChatBubble>
                 <ChatBubble>chat?.content?.content2</ChatBubble> */}
+                <ChatDivider>Today, 01 January 2024</ChatDivider>
+                <ChatDivider variant="red">New Message</ChatDivider>
             </div>
 
             {/* footer */}
-            <div className="flex flex-row gap-[15px]">
+            <div className="flex flex-row gap-[15px]" >
                 <TypeBar placeholder="Type a message..." />
                 <Button>Send</Button>
             </div>

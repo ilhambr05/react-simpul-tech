@@ -8,6 +8,7 @@ import ChatBubble from './UI/ChatBubble';
 import ChatDivider from './UI/chatDivider';
 import TypeBar from './UI/TypeBar';
 import Connecting from './UI/Connecting';
+import { getDateTime } from '../utils/date';
 
 function generateParticipantsColorData(participants) {
     let generatedParticipantsData = {};
@@ -35,7 +36,6 @@ function generateParticipantsColorData(participants) {
 }
 
 function ChatDetail({ chatID, setChatDetailId }) {
-    // console.log("chat detail rendered")
     const chatSummary = dummyChatSummary.find((chat) => chat.id === chatID);
     const participantNumber = chatSummary?.participants.length || 0;
     const participantsData = generateParticipantsColorData(chatSummary.participants);
@@ -44,28 +44,39 @@ function ChatDetail({ chatID, setChatDetailId }) {
     const [chatDetail, setChatDetail] = useState(dummyChatDetail);
     const [isConnecting, setIsConnecting] = useState(true);
     const [isNewMessageNotifVisible, setIsNewMessageNotifVisible] = useState(undefined);
+    const [newMessage, setNewMessage] = useState("");
+
+    const chatContainerRef = useRef();
+    const newMessagesNotifRef = useRef();
+    const newMessagesTextRef = useRef();
+
+    let chatDateDivider = new Date(chatDetail.messages[0].timestamp).toDateString();
+    let chatLastSeenTimestamp = chatDetail.timestampUserLastSeenChat;
 
     useEffect(() => {
         setIsConnecting(true);
         setTimeout(() => {
             setIsConnecting(false);
+            newMessagesTextRef.current.focus();
         }, 1000);
     }, []);
 
-    // chat event onscroll
+    // event handlers
     useEffect(() => {
         const chatContainerEl = chatContainerRef.current;
+        const newMessageInput = newMessagesTextRef.current;
+
         chatContainerEl.addEventListener('scroll', checkNewMessageNotifVisible);
+        newMessageInput.addEventListener('change', changeNewMessage);
         return () => {
             chatContainerEl.removeEventListener('scroll', checkNewMessageNotifVisible);
+            newMessageInput.removeEventListener('change', changeNewMessage);
         };
     }, []);
 
-    let chatDateDivider = new Date(chatDetail.messages[0].timestamp).toDateString();
-    let chatLastSeenTimestamp = chatDetail.timestampUserLastSeenChat;
-
-    const chatContainerRef = useRef();
-    const newMessagesNotifRef = useRef();
+    function changeNewMessage(event) {
+        setNewMessage(event.target.value);
+    }
 
     function checkNewMessageNotifVisible(event) {
         const chatContainerEl = event.target;
@@ -80,6 +91,44 @@ function ChatDetail({ chatID, setChatDetailId }) {
 
     function scrollToNewMessage() {
         // TODO ?
+    }
+
+    function sendNewChat(event) {
+        event.preventDefault();
+        const inputEl = newMessagesTextRef.current;
+
+        if (!inputEl.value) {
+            inputEl.focus();
+            return;
+        } else {
+            // generate new chat
+            setChatDetail((prevChatDetail) => {
+                const chatMsg = newMessage;
+                const timestampNow = new Date().getTime();
+                const timeNow = getDateTime(timestampNow)?.formattedTime;
+
+                return {
+                    ...prevChatDetail,
+                    timestampUserLastSeenChat: timestampNow,
+                    messages: [
+                        {
+                            messageID: prevChatDetail.messages.length + 1,
+                            content: chatMsg,
+                            timestamp: timestampNow,
+                            senderID: 111,
+                            senderName: "Ilham",
+                            time: timeNow,
+                        },
+                        ...prevChatDetail.messages
+                    ],
+                };
+            });
+
+            inputEl.focus();
+        }
+
+        // clear input
+        inputEl.value = "";
     }
 
     return (
@@ -110,20 +159,29 @@ function ChatDetail({ chatID, setChatDetailId }) {
                 {/* <ChatDivider>Today, 01 January 2024</ChatDivider> */}
                 {
                     chatDetail.messages.map((chat, index) => {
+                        const yourUserID = 111;
+                        // last message = first index
+                        const isLastMessageCreatedByYou = chat.senderID === yourUserID && index === 0;
+                        // console.log({ isLastMessageCreatedByYou })
+
                         const newChatDateDivider = new Date(chat.timestamp).toDateString();
                         const isDateChanged = newChatDateDivider !== chatDateDivider;
                         let dateDividerComponent = null;
                         let newMessagesNotifComponent = null;
 
                         if (isDateChanged) {
+                            // give date divider
                             dateDividerComponent = <ChatDivider key={dateDividerComponent}>{chatDateDivider}</ChatDivider>;
                             chatDateDivider = newChatDateDivider;
                         }
-                        if ((chat.timestamp <= chatLastSeenTimestamp)) {
-                            if (!isNewMessageNotifDisplayed) {
-                                isNewMessageNotifDisplayed = true;
-                                newMessagesNotifComponent = <ChatDivider ref={newMessagesNotifRef} variant="red" >New Message</ChatDivider>;
-                            }
+                        if (isLastMessageCreatedByYou) {
+                            // skip new message notif
+                            isNewMessageNotifDisplayed = true;
+                        }
+                        if ((chat.timestamp < chatLastSeenTimestamp && !isNewMessageNotifDisplayed)) {
+                            // handle new message notif divider
+                            isNewMessageNotifDisplayed = true;
+                            newMessagesNotifComponent = <ChatDivider ref={newMessagesNotifRef} variant="red" >New Message</ChatDivider>;
                         }
                         return (
                             <div key={index}>
@@ -146,10 +204,10 @@ function ChatDetail({ chatID, setChatDetailId }) {
             }
 
             {/* footer */}
-            <div className="flex flex-row gap-[15px]" >
-                <TypeBar placeholder="Type a message..." />
-                <Button>Send</Button>
-            </div>
+            <form onSubmit={sendNewChat} className="flex flex-row gap-[15px]" >
+                <TypeBar ref={newMessagesTextRef} placeholder="Type a message..." />
+                <Button type="submit">Send</Button>
+            </form>
         </>
     )
 }

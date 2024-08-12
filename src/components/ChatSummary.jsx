@@ -13,7 +13,7 @@ function ChatSummary({ setChatDetailId }) {
         setTimeout(() => {
             setChatSummary(dummyChatSummary);
             setIsLoading(false);
-        }, 1000);
+        }, 500);
     }, []);
 
     return (

@@ -1,14 +1,18 @@
 import { useEffect, useRef, useState } from 'react';
 import arrowLeft from '../assets/icons/UI/arrow-back.png';
 import closeIcon from '../assets/icons/UI/close-dark.png';
-import dummyChatSummary from "../dummy/chat";
-import dummyChatDetail from "../dummy/chatDetail1";
+import dummyChatSummary from "../dummy/chatSummary";
+import dummyChatDetail1 from "../dummy/chatDetail1";
+import dummyChatDetail2 from "../dummy/chatDetail2";
+import dummyChatDetail3 from "../dummy/chatDetail3";
+import dummyChatSupport from "../dummy/chatSupport";
 import Button from './UI/Button';
 import ChatBubble from './UI/ChatBubble';
 import ChatDivider from './UI/chatDivider';
 import TypeBar from './UI/TypeBar';
 import Connecting from './UI/Connecting';
 import { getDateTime } from '../utils/date';
+import chatSupport from '../dummy/chatSupport';
 
 function generateParticipantsColorData(participants) {
     let generatedParticipantsData = {};
@@ -35,13 +39,20 @@ function generateParticipantsColorData(participants) {
     return generatedParticipantsData;
 }
 
+const dummyChatDetailIndexes = {
+    999: dummyChatSupport,
+    1: dummyChatDetail1,
+    2: dummyChatDetail2,
+    3: dummyChatDetail3,
+}
+
 function ChatDetail({ chatID, setChatDetailId }) {
     const chatSummary = dummyChatSummary.find((chat) => chat.id === chatID);
     const participantNumber = chatSummary?.participants.length || 0;
     const participantsData = generateParticipantsColorData(chatSummary.participants);
     let isNewMessageNotifDisplayed = false;
 
-    const [chatDetail, setChatDetail] = useState(dummyChatDetail);
+    const [chatDetail, setChatDetail] = useState([]);
     const [isConnecting, setIsConnecting] = useState(true);
     const [isNewMessageNotifVisible, setIsNewMessageNotifVisible] = useState(undefined);
     const [newMessage, setNewMessage] = useState("");
@@ -50,16 +61,17 @@ function ChatDetail({ chatID, setChatDetailId }) {
     const newMessagesNotifRef = useRef();
     const newMessagesTextRef = useRef();
 
-    let chatDateDivider = new Date(chatDetail.messages[0].timestamp).toDateString();
+    let chatDateDivider = chatDetail.length ? new Date(chatDetail?.messages[0]?.timestamp).toDateString() : null;
     let chatLastSeenTimestamp = chatDetail.timestampUserLastSeenChat;
 
     useEffect(() => {
         setIsConnecting(true);
         setTimeout(() => {
+            setChatDetail(dummyChatDetailIndexes[chatID]);
             setIsConnecting(false);
             newMessagesTextRef.current.focus();
         }, 1000);
-    }, []);
+    }, [chatID]);
 
     // event handlers
     useEffect(() => {
@@ -161,7 +173,7 @@ function ChatDetail({ chatID, setChatDetailId }) {
                 {/* <ChatDivider ref={newMessagesNotifRef} variant="red" >New Message</ChatDivider> */}
                 {/* <ChatDivider>Today, 01 January 2024</ChatDivider> */}
                 {
-                    chatDetail.messages.map((chat, index) => {
+                    chatDetail?.messages?.map((chat, index) => {
                         const yourUserID = 111;
                         // last message = first index
                         const isLastMessageCreatedByYou = chat.senderID === yourUserID && index === 0;
@@ -174,14 +186,14 @@ function ChatDetail({ chatID, setChatDetailId }) {
 
                         if (isDateChanged) {
                             // give date divider
-                            dateDividerComponent = <ChatDivider key={dateDividerComponent}>{chatDateDivider}</ChatDivider>;
+                            dateDividerComponent = chatDateDivider ? <ChatDivider key={dateDividerComponent}>{chatDateDivider}</ChatDivider> : null;
                             chatDateDivider = newChatDateDivider;
                         }
-                        if (isLastMessageCreatedByYou) {
+                        if (chat.timestamp <= chatLastSeenTimestamp && isLastMessageCreatedByYou) {
                             // skip new message notif
                             isNewMessageNotifDisplayed = true;
                         }
-                        if ((chat.timestamp < chatLastSeenTimestamp && !isNewMessageNotifDisplayed)) {
+                        if (chat.timestamp < chatLastSeenTimestamp && !isNewMessageNotifDisplayed) {
                             // handle new message notif divider
                             isNewMessageNotifDisplayed = true;
                             newMessagesNotifComponent = <ChatDivider ref={newMessagesNotifRef} variant="red" >New Message</ChatDivider>;
@@ -196,7 +208,7 @@ function ChatDetail({ chatID, setChatDetailId }) {
                     })
                 }
                 {/* first message date */}
-                {chatDetail.messages.length > 0 &&
+                {chatDetail?.messages?.length > 0 &&
                     <ChatDivider>{chatDateDivider}</ChatDivider>
                 }
             </div>

@@ -7,7 +7,7 @@ import chatSupport from "./chatSupport";
 
 const chatSummary = [
     {
-        id: 0,
+        id: 999,
         type: "support",
         participants: [
             {
@@ -20,6 +20,7 @@ const chatSummary = [
         content: {
             title: "fastVisa Support",
             sender: chatSupport?.messages[0]?.senderName,
+            hasNewMessage: true,
             message: chatSupport?.messages[0]?.content,
             dateTime: `${chatSupport?.messages[0]?.date} ${chatSupport?.messages[0]?.time}`
         }
@@ -50,6 +51,7 @@ const chatSummary = [
         content: {
             title: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quidem, est enim facilis rem similique consectetur",
             sender: chatDetail1?.messages[0]?.senderName,
+            hasNewMessage: chatDetail1.timestampUserLastSeenChat < chatDetail1?.messages[0]?.timestamp,
             message: chatDetail1?.messages[0]?.content,
             dateTime: `${chatDetail1?.messages[0]?.date} ${chatDetail1?.messages[0]?.time}`
         }
@@ -80,6 +82,7 @@ const chatSummary = [
         content: {
             title: "Catching Up",
             sender: chatDetail2?.messages[0]?.senderName,
+            hasNewMessage: chatDetail2.timestampUserLastSeenChat < chatDetail2?.messages[0]?.timestamp,
             message: chatDetail2?.messages[0]?.content,
             dateTime: `${chatDetail2?.messages[0]?.date} ${chatDetail2?.messages[0]?.time}`
         }
@@ -104,6 +107,7 @@ const chatSummary = [
         content: {
             title: "Next Project ?",
             sender: chatDetail3?.messages[0]?.senderName,
+            hasNewMessage: chatDetail3.timestampUserLastSeenChat < chatDetail3?.messages[0]?.timestamp,
             message: chatDetail3?.messages[0]?.content,
             dateTime: `${chatDetail3?.messages[0]?.date} ${chatDetail3?.messages[0]?.time}`
         }

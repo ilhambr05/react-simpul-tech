@@ -2,7 +2,7 @@ const chatDetail2 = {
   chatID: 2,
   timestampChatBegin: 1704078000000,
   dateTimeChatBegin: "01/01/2024 10:00",
-  timestampUserLastSeenChat: 1704166700000,
+  timestampUserLastSeenChat: 1704079700000,
   dateTimeUserLastSeenChat: "01/01/2024 10:45",
   participants: [
     { senderID: 1, senderName: "John Doe" },

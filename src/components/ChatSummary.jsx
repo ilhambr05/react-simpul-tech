@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Loader from "./UI/Loader";
 import SearchBar from "./UI/SearchBar";
 
-import dummyChatSummary from "../dummy/chat";
+import dummyChatSummary from "../dummy/chatSummary";
 
 function ChatSummary({ setChatDetailId }) {
     const [chatSummary, setChatSummary] = useState([]);
@@ -56,7 +56,13 @@ function ChatSummary({ setChatDetailId }) {
                                                 </div>
                                             </div>
                                         </div>
-                                        <div className="min-w-[145px] ml-[20px]">{summary.content.dateTime}</div>
+                                        <div className="min-w-[145px] ml-[20px] flex flex-col gap-[20px]">
+                                            {summary.content.dateTime}
+                                            {
+                                                summary.content.hasNewMessage &&
+                                                <div className="rounded-full w-[10px] h-[10px] bg-indicator-red self-center"></div>
+                                            }
+                                        </div>
                                     </div>
                                 )
                             })

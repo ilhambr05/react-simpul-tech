@@ -12,7 +12,7 @@ const ChatDivider = forwardRef(
 
         return (
             <>
-                <div ref={ref} className="flex flex-row gap-1 mt-6 mb-3 items-center">
+                <div ref={ref} className="flex flex-row gap-1 pt-6 pb-3 items-center">
                     <div className={`flex-grow h-[1px] border-t-2 border-solid ${borderColorClass}`}>
                     </div>
                     <div className={`px-5 font-bold ${textColorClass}`}>

@@ -34,22 +34,8 @@ function generateParticipantsColorData(participants) {
     return generatedParticipantsData;
 }
 
-function checkVisibility(elementRef, parentNode) {
-    // console.log(elementRef.current)
-    const el = elementRef.current.getBoundingClientRect();
-    // const parentNode = parentRef.current;
-
-    console.log({ parentTop: parentNode, elTop: el.top, elBottom: el.bottom });
-    // return (
-    //     el.top >= 0 &&
-    //     el.bottom <= (
-    //         parentNode.innerHeight
-    //         // || document.documentElement.clientHeight
-    //     )
-    // );
-}
-
 function ChatDetail({ chatID, setChatDetailId }) {
+    // console.log("chat detail rendered")
     const chatSummary = dummyChatSummary.find((chat) => chat.id === chatID);
     const participantNumber = chatSummary?.participants.length || 0;
     const participantsData = generateParticipantsColorData(chatSummary.participants);
@@ -57,33 +43,44 @@ function ChatDetail({ chatID, setChatDetailId }) {
 
     const [chatDetail, setChatDetail] = useState(dummyChatDetail);
     const [isConnecting, setIsConnecting] = useState(true);
+    const [isNewMessageNotifVisible, setIsNewMessageNotifVisible] = useState(undefined);
 
     useEffect(() => {
         setIsConnecting(true);
         setTimeout(() => {
             setIsConnecting(false);
-
         }, 1000);
+    }, []);
+
+    // chat event onscroll
+    useEffect(() => {
+        const chatContainerEl = chatContainerRef.current;
+        chatContainerEl.addEventListener('scroll', checkNewMessageNotifVisible);
+        return () => {
+            chatContainerEl.removeEventListener('scroll', checkNewMessageNotifVisible);
+        };
     }, []);
 
     let chatDateDivider = new Date(chatDetail.messages[0].timestamp).toDateString();
     let chatLastSeenTimestamp = chatDetail.timestampUserLastSeenChat;
 
-    // const chatContainerRef = useRef();
+    const chatContainerRef = useRef();
     const newMessagesNotifRef = useRef();
 
-    function checkNotifVisible(event) {
-        // console.log(newMessagesNotifRef)
-        // console.log(checkVisibility(newMessagesNotifRef, event?.target));
-        // console.log("scrolled")
+    function checkNewMessageNotifVisible(event) {
+        const chatContainerEl = event.target;
+        let hiddenViewport = chatContainerEl.scrollHeight - chatContainerEl.clientHeight - chatContainerEl.getBoundingClientRect().top;
+        let newMessagesNotifRefTop = newMessagesNotifRef?.current.getBoundingClientRect().top;
+        let newMessagesNotifRefScrollTop = newMessagesNotifRefTop + hiddenViewport;
+
+        const scrollToHideNewMessageNotif = chatContainerEl.scrollHeight - newMessagesNotifRefScrollTop;
+
+        setIsNewMessageNotifVisible(scrollToHideNewMessageNotif > 0);
     }
 
-    // chatDetail.messages.forEach((item, index) => {
-    //     const date = new Date(`${item.date} ${item.time}`);
-    //     item.timestamp = date.getTime();
-    // });
-
-    // console.log(JSON.stringify(chatDetail.messages))
+    function scrollToNewMessage() {
+        // TODO ?
+    }
 
     return (
         <>
@@ -102,7 +99,13 @@ function ChatDetail({ chatID, setChatDetailId }) {
             </div>
 
             {/* content */}
-            <div className="flex flex-col-reverse justify-items-end flex-grow gap-[8px] overflow-y-auto py-[15px]" onScroll={checkNotifVisible}>
+            <div ref={chatContainerRef} className="flex flex-col-reverse justify-items-end flex-grow gap-[8px] overflow-y-auto py-[15px]">
+                {
+                    (!isNewMessageNotifVisible && isNewMessageNotifVisible !== undefined) &&
+                    <div className='flex justify-center absolute w-full left-0'>
+                        <div className='px-[12px] py-[8px] rounded-[5px] bg-stickers-light-blue text-primary-blue font-bold cursor-pointer' onClick={scrollToNewMessage}>New Message</div>
+                    </div>
+                }
                 {/* <ChatDivider ref={newMessagesNotifRef} variant="red" >New Message</ChatDivider> */}
                 {/* <ChatDivider>Today, 01 January 2024</ChatDivider> */}
                 {
@@ -117,8 +120,7 @@ function ChatDetail({ chatID, setChatDetailId }) {
                             chatDateDivider = newChatDateDivider;
                         }
                         if ((chat.timestamp <= chatLastSeenTimestamp)) {
-                            // console.log("seen", chat.messageID);
-                            if(!isNewMessageNotifDisplayed){
+                            if (!isNewMessageNotifDisplayed) {
                                 isNewMessageNotifDisplayed = true;
                                 newMessagesNotifComponent = <ChatDivider ref={newMessagesNotifRef} variant="red" >New Message</ChatDivider>;
                             }
@@ -132,25 +134,10 @@ function ChatDetail({ chatID, setChatDetailId }) {
                         );
                     })
                 }
-                <ChatDivider>{chatDateDivider}</ChatDivider>
-                {/* <ChatBubble>chat?.content?.content</ChatBubble>
-                <ChatBubble>chat?.content?.content</ChatBubble>
-                <ChatBubble>chat?.content?.content</ChatBubble>
-                <ChatBubble>chat?.content?.content</ChatBubble>
-                <ChatBubble>chat?.content?.content</ChatBubble>
-                <ChatBubble>chat?.content?.content2</ChatBubble>
-                <ChatBubble>chat?.content?.content</ChatBubble>
-                <ChatBubble>chat?.content?.content</ChatBubble>
-                <ChatBubble>chat?.content?.content</ChatBubble>
-                <ChatBubble>chat?.content?.content</ChatBubble>
-                <ChatBubble>chat?.content?.content</ChatBubble>
-                <ChatBubble>chat?.content?.content2</ChatBubble>
-                <ChatBubble>chat?.content?.content</ChatBubble>
-                <ChatBubble>chat?.content?.content</ChatBubble>
-                <ChatBubble>chat?.content?.content</ChatBubble>
-                <ChatBubble>chat?.content?.content</ChatBubble>
-                <ChatBubble>chat?.content?.content</ChatBubble>
-                <ChatBubble>chat?.content?.content2</ChatBubble> */}
+                {/* first message date */}
+                {chatDetail.messages.length > 0 &&
+                    <ChatDivider>{chatDateDivider}</ChatDivider>
+                }
             </div>
 
             {

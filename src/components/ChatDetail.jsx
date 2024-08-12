@@ -49,6 +49,7 @@ const dummyChatDetailIndexes = {
 function ChatDetail({ chatID, setChatDetailId }) {
     const chatSummary = dummyChatSummary.find((chat) => chat.id === chatID);
     const participantNumber = chatSummary?.participants.length || 0;
+    const chatType = chatSummary?.type;
     const participantsData = generateParticipantsColorData(chatSummary.participants);
     let isNewMessageNotifDisplayed = false;
 
@@ -65,11 +66,13 @@ function ChatDetail({ chatID, setChatDetailId }) {
     let chatLastSeenTimestamp = chatDetail.timestampUserLastSeenChat;
 
     useEffect(() => {
+        setChatDetail(dummyChatDetailIndexes[chatID] || dummyChatDetail1);
         setIsConnecting(true);
+        newMessagesTextRef.current.focus();
+
+        // mock loading/fetching
         setTimeout(() => {
-            setChatDetail(dummyChatDetailIndexes[chatID]);
             setIsConnecting(false);
-            newMessagesTextRef.current.focus();
         }, 1000);
     }, [chatID]);
 
@@ -214,7 +217,7 @@ function ChatDetail({ chatID, setChatDetailId }) {
             </div>
 
             {
-                isConnecting &&
+                (isConnecting && chatType === "support") &&
                 <Connecting>Please wait while we connect you with one of our team ...</Connecting>
             }
 

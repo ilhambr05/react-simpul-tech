@@ -50,20 +50,24 @@ function checkVisibility(elementRef, parentNode) {
 }
 
 function ChatDetail({ chatID, setChatDetailId }) {
-    const chat = dummyChatSummary.find((chat) => chat.id === chatID);
-    const participantNumber = chat?.participants.length || 0;
-    const participantsData = generateParticipantsColorData(chat.participants);
+    const chatSummary = dummyChatSummary.find((chat) => chat.id === chatID);
+    const participantNumber = chatSummary?.participants.length || 0;
+    const participantsData = generateParticipantsColorData(chatSummary.participants);
+    let isNewMessageNotifDisplayed = false;
 
+    const [chatDetail, setChatDetail] = useState(dummyChatDetail);
     const [isConnecting, setIsConnecting] = useState(true);
 
     useEffect(() => {
         setIsConnecting(true);
         setTimeout(() => {
             setIsConnecting(false);
+
         }, 1000);
     }, []);
 
-    let chatDateDivider = new Date(dummyChatDetail.messages[0].timestamp).toDateString();
+    let chatDateDivider = new Date(chatDetail.messages[0].timestamp).toDateString();
+    let chatLastSeenTimestamp = chatDetail.timestampUserLastSeenChat;
 
     // const chatContainerRef = useRef();
     const newMessagesNotifRef = useRef();
@@ -74,12 +78,12 @@ function ChatDetail({ chatID, setChatDetailId }) {
         // console.log("scrolled")
     }
 
-    dummyChatDetail.messages.forEach((item, index) => {
-        const date = new Date(`${item.date} ${item.time}`);
-        item.timestamp = date.getTime();
-    });
+    // chatDetail.messages.forEach((item, index) => {
+    //     const date = new Date(`${item.date} ${item.time}`);
+    //     item.timestamp = date.getTime();
+    // });
 
-    console.log(JSON.stringify(dummyChatDetail.messages))
+    // console.log(JSON.stringify(chatDetail.messages))
 
     return (
         <>
@@ -89,7 +93,7 @@ function ChatDetail({ chatID, setChatDetailId }) {
                     <img src={arrowLeft} alt="back" />
                 </div>
                 <div className='flex-grow'>
-                    <div className='text-[16px] font-bold text-primary-blue'>{chat?.content?.title || "title"}</div>
+                    <div className='text-[16px] font-bold text-primary-blue'>{chatSummary?.content?.title || "title"}</div>
                     <div className='text-[14px]'>{`${participantNumber} Participant${participantNumber > 1 ? "s" : ""}`}</div>
                 </div>
                 <div className="flex items-center justify-center cursor-pointer" onClick={() => setChatDetailId(0)}>
@@ -99,21 +103,30 @@ function ChatDetail({ chatID, setChatDetailId }) {
 
             {/* content */}
             <div className="flex flex-col-reverse justify-items-end flex-grow gap-[8px] overflow-y-auto py-[15px]" onScroll={checkNotifVisible}>
-                <ChatDivider ref={newMessagesNotifRef} variant="red" >New Message</ChatDivider>
+                {/* <ChatDivider ref={newMessagesNotifRef} variant="red" >New Message</ChatDivider> */}
                 {/* <ChatDivider>Today, 01 January 2024</ChatDivider> */}
                 {
-                    dummyChatDetail.messages.map((chat, index) => {
+                    chatDetail.messages.map((chat, index) => {
                         const newChatDateDivider = new Date(chat.timestamp).toDateString();
                         const isDateChanged = newChatDateDivider !== chatDateDivider;
                         let dateDividerComponent = null;
+                        let newMessagesNotifComponent = null;
 
                         if (isDateChanged) {
                             dateDividerComponent = <ChatDivider key={dateDividerComponent}>{chatDateDivider}</ChatDivider>;
                             chatDateDivider = newChatDateDivider;
                         }
+                        if ((chat.timestamp <= chatLastSeenTimestamp)) {
+                            // console.log("seen", chat.messageID);
+                            if(!isNewMessageNotifDisplayed){
+                                isNewMessageNotifDisplayed = true;
+                                newMessagesNotifComponent = <ChatDivider ref={newMessagesNotifRef} variant="red" >New Message</ChatDivider>;
+                            }
+                        }
                         return (
                             <div key={index}>
                                 <ChatBubble key={`${index}-${chat.id}`} chatData={chat} participantsData={participantsData}>{chat.content}</ChatBubble>
+                                {newMessagesNotifComponent}
                                 {dateDividerComponent}
                             </div>
                         );
@@ -139,7 +152,7 @@ function ChatDetail({ chatID, setChatDetailId }) {
                 <ChatBubble>chat?.content?.content</ChatBubble>
                 <ChatBubble>chat?.content?.content2</ChatBubble> */}
             </div>
-            
+
             {
                 isConnecting &&
                 <Connecting>Please wait while we connect you with one of our team ...</Connecting>

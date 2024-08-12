@@ -79,6 +79,9 @@ function ChatDetail({ chatID, setChatDetailId }) {
     }
 
     function checkNewMessageNotifVisible(event) {
+        if(!newMessagesNotifRef?.current){
+            return;
+        }
         const chatContainerEl = event.target;
         let hiddenViewport = chatContainerEl.scrollHeight - chatContainerEl.clientHeight - chatContainerEl.getBoundingClientRect().top;
         let newMessagesNotifRefTop = newMessagesNotifRef?.current.getBoundingClientRect().top;

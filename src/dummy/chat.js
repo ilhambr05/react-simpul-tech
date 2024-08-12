@@ -1,9 +1,32 @@
 import personLogo from "../assets/icons/UI/person.png"
 import personDarkLogo from "../assets/icons/UI/person-dark.png"
+import chatDetail1 from "./chatDetail1";
+import chatDetail2 from "./chatDetail2";
+import chatDetail3 from "./chatDetail3";
+import chatSupport from "./chatSupport";
 
 const chatSummary = [
     {
+        id: 0,
+        type: "support",
+        participants: [
+            {
+                userID: 0,
+                name: "FastVisa Support",
+                icon: personLogo,
+                styleClass: "bg-primary-blue",
+            },
+        ],
+        content: {
+            title: "fastVisa Support",
+            sender: chatSupport?.messages[0]?.senderName,
+            message: chatSupport?.messages[0]?.content,
+            dateTime: `${chatSupport?.messages[0]?.date} ${chatSupport?.messages[0]?.time}`
+        }
+    },
+    {
         id: 1,
+        type: "conversation",
         participants: [
             {
                 userID: 1,
@@ -26,40 +49,18 @@ const chatSummary = [
         ],
         content: {
             title: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quidem, est enim facilis rem similique consectetur",
-            sender: "sender",
-            message: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quidem, est enim facilis rem similique consectetur aliquam perferendis quam alias ipsam earum dolorem qui officia ipsum in veniam culpa excepturi libero?",
-            dateTime: "01/01/2024 12:12"
+            sender: chatDetail1?.messages[0]?.senderName,
+            message: chatDetail1?.messages[0]?.content,
+            dateTime: `${chatDetail1?.messages[0]?.date} ${chatDetail1?.messages[0]?.time}`
         }
     },
     {
         id: 2,
+        type: "conversation",
         participants: [
             {
-                userID: 2,
-                name: "Jane Smith",
-                icon: personLogo,
-                styleClass: "bg-primary-blue",
-            },
-            {
-                userID: 111,
-                name: "ilham",
-                icon: personLogo,
-                styleClass: "bg-indicator-orange",
-            }
-        ],
-        content: {
-            title: "Lorem ipsum dolor sit amet consectetur",
-            sender: "Ilham burhanuddin Rabbani",
-            message: "Try This One",
-            dateTime: "01/01/2024 12:12"
-        }
-    },
-    {
-        id: 3,
-        participants: [
-            {
-                userID: 2,
-                name: "Jane Smith",
+                userID: 1,
+                name: "John Doe",
                 icon: personLogo,
                 styleClass: "bg-primary-blue",
             },
@@ -67,24 +68,49 @@ const chatSummary = [
                 userID: 2,
                 name: "Jane Smith",
                 icon: personDarkLogo,
-                styleClass: "",
+                styleClass: "bg-primary-light-grey",
             },
             {
-                userID: 2,
-                name: "Jane Smith",
+                userID: 111,
+                name: "Ilham",
                 icon: personLogo,
-                styleClass: "bg-primary-light-grey",
+                styleClass: "bg-indicator-orange",
             },
         ],
         content: {
-            title: "Lorem ipsum dolor sit amet consectetur",
-            sender: "hahaha",
-            message: "Lorem ipsum dolor sit amet consectetur",
-            dateTime: "01/01/2024 12:12"
+            title: "Catching Up",
+            sender: chatDetail2?.messages[0]?.senderName,
+            message: chatDetail2?.messages[0]?.content,
+            dateTime: `${chatDetail2?.messages[0]?.date} ${chatDetail2?.messages[0]?.time}`
+        }
+    },
+    {
+        id: 3,
+        type: "conversation",
+        participants: [
+            {
+                userID: 1,
+                name: "John Doe",
+                icon: personLogo,
+                styleClass: "bg-primary-blue",
+            },
+            {
+                userID: 111,
+                name: "Ilham",
+                icon: personLogo,
+                styleClass: "bg-indicator-orange",
+            },
+        ],
+        content: {
+            title: "Next Project ?",
+            sender: chatDetail3?.messages[0]?.senderName,
+            message: chatDetail3?.messages[0]?.content,
+            dateTime: `${chatDetail3?.messages[0]?.date} ${chatDetail3?.messages[0]?.time}`
         }
     },
     {
         id: 4,
+        type: "conversation",
         participants: [
             {
                 userID: 1,
@@ -108,6 +134,7 @@ const chatSummary = [
     },
     {
         id: 5,
+        type: "conversation",
         participants: [
             {
                 userID: 1,
@@ -131,6 +158,7 @@ const chatSummary = [
     },
     {
         id: 6,
+        type: "conversation",
         participants: [
             {
                 userID: 1,
@@ -154,6 +182,7 @@ const chatSummary = [
     },
     {
         id: 7,
+        type: "conversation",
         participants: [
             {
                 userID: 1,
@@ -177,6 +206,7 @@ const chatSummary = [
     },
     {
         id: 8,
+        type: "conversation",
         participants: [
             {
                 userID: 1,

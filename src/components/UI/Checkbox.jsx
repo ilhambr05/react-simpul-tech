@@ -8,7 +8,7 @@ function Checkbox({ isChecked, onChange, children }) {
             <img
                 src={isChecked ? checkedIcon : uncheckedIcon}
                 alt="Checkbox"
-                className="w-[20px] h-[20px]"
+                className="w-[20px] max-w-[unset] h-[20px]"
                 onClick={onChange}
             />
             {children}

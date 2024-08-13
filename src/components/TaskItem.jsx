@@ -7,10 +7,13 @@ import dateInactiveIcon from '../assets/icons/UI/task-date-inactive.png';
 import editActiveIcon from '../assets/icons/UI/task-edit-active.png';
 import editInactiveIcon from '../assets/icons/UI/task-edit-inactive.png';
 import TaskDelete from "./UI/TaskDelete";
+import TextAreaAuto from "./UI/TextAreaAuto";
 
 function TaskItem({ task }) {
     const [isDone, setIsDone] = useState(task.isDone);
     const [isExpanded, setIsExpanded] = useState(false);
+    const [taskDescText, setTaskDescText] = useState(task.description);
+    const [isEditMode, setIsEditMode] = useState(false);
 
     function handleOnCheck() {
         setIsDone(!isDone);
@@ -39,23 +42,32 @@ function TaskItem({ task }) {
                         </div>
                     </div>
                     <div className="flex items-center gap-[15px]">
+                        <div className="w-[20px]">
+
                         <img
                             src={isExpanded ? dateInactiveIcon : dateActiveIcon}
                             alt="date-icon"
-                            className="h-[auto] w-[20px]"
+                            // className="h-[auto] w-[20px]"
                         />
+                        </div>
                         <input type="date" className="text-primary-dark-grey border rounded-[5px] border-solid border-primary-grey py-[8px] px-[12px] min-w-[200px]"></input>
                     </div>
-                    <div className="flex items-center gap-[15px]">
-                        <img
-                            src={isExpanded ? editInactiveIcon : editActiveIcon}
-                            alt="edit-icon"
-                            className="w-[20px]"
-                        />
-                        <textarea type="text" className="flex-grow text-primary-dark-grey border rounded-[5px] border-solid border-primary-grey min-w-[200px]"></textarea>
+                    <div className="flex flex-row gap-[15px]">
+                        <div className="cursor-pointer pt-[5px]" onClick={() => { setIsEditMode(!isEditMode) }}>
+                            <img
+                                className="w-[20px] max-w-[unset]"
+                                src={isEditMode ? editActiveIcon : editInactiveIcon}
+                                alt="edit-icon"
+                            />
+                        </div>
+                        <div className="cursor-pointer flex-grow" onClick={() => { setIsEditMode(true) }}>
+                            {
+                                isEditMode
+                                    ? <TextAreaAuto value={taskDescText} onTextChange={setTaskDescText}></TextAreaAuto>
+                                    : <div>{taskDescText}</div>
+                            }
+                        </div>
                     </div>
-                    {/* <div className="text-primary-dark-grey">{task.description}</div> */}
-                    <div className="text-primary-dark-grey">{task.description}</div>
                 </div>
             </div>
         </div>

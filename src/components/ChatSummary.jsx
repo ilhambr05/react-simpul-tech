@@ -21,7 +21,7 @@ function ChatSummary({ setChatDetailId }) {
             <SearchBar />
             {
                 isLoading
-                    ? <Loader>Loading Chat</Loader>
+                    ? <Loader>Loading Chats ...</Loader>
                     :
                     <div className="overflow-y-auto">
                         {

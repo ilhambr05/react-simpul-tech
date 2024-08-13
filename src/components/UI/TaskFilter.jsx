@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { usePopper } from 'react-popper';
-import expandIcon from '../../assets/icons/UI/expand_more_24px.png';
+import expandIcon from '../../assets/icons/UI/expand.png';
 
 function TaskFilter() {
     const [referenceElement, setReferenceElement] = useState(null);
@@ -26,10 +26,6 @@ function TaskFilter() {
 
     function doFilter(filterName) {
         alert('Do filter ', filterName);
-        // setMenuOpen(false);
-    }
-    function doDelete() {
-        alert('Do Delete');
         // setMenuOpen(false);
     }
 

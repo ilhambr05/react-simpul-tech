@@ -27,6 +27,10 @@ function ChatMenuPopper({ isYou }) {
         alert('Do Delete');
         // setMenuOpen(false);
     }
+    function doShare() {
+        alert('Do Share');
+        // setMenuOpen(false);
+    }
     function doReply() {
         alert('Do Reply');
         // setMenuOpen(false);
@@ -40,18 +44,17 @@ function ChatMenuPopper({ isYou }) {
 
             {menuOpen && (
                 <div className='absolute top-0 left-0 w-screen h-screen bg-black/50 z-0'>
-                    {
-                        isYou ?
-                            <div className="flex flex-col z-10" ref={setPopperElement} style={styles.popper} {...attributes.popper} onMouseLeave={() => hideMenu()}>
-                                <button onClick={doEdit} className='text-primary-blue px-3 py-2 text-left bg-[#FFFFFF] border border-solid border-primary-light-grey w-20 rounded-t-[5px]'>Edit</button>
-                                <button onClick={doDelete} className='text-indicator-red px-3 py-2 text-left bg-[#FFFFFF] border border-solid border-primary-light-grey border-t-0 w-20 rounded-b-[5px]'>Delete</button>
-                            </div>
-
-                            :
-                            <div className="flex flex-col z-10" ref={setPopperElement} style={styles.popper} {...attributes.popper} onMouseLeave={() => hideMenu()}>
-                                <button onClick={doReply} className='text-primary-dark-grey px-3 py-2 text-left bg-[#FFFFFF] border border-solid border-primary-light-grey w-20 rounded-[5px]'>Reply</button>
-                            </div>
-                    }
+                    <div className="flex flex-col z-10" ref={setPopperElement} style={styles.popper} {...attributes.popper} onMouseLeave={() => hideMenu()}>
+                        {
+                            isYou &&
+                                <>
+                                    <button onClick={doEdit} className='text-primary-blue px-3 py-2 text-left bg-[#FFFFFF] border border-solid border-primary-light-grey w-20 rounded-t-[5px] first:rounded-b-none'>Edit</button>
+                                    <button onClick={doDelete} className='text-indicator-red px-3 py-2 text-left bg-[#FFFFFF] border border-solid border-primary-light-grey w-20 rounded-none border-t-0 border-b-0'>Delete</button>
+                                </>
+                        }
+                        <button onClick={doShare} className='text-primary-dark-grey px-3 py-2 text-left bg-[#FFFFFF] border border-solid border-primary-light-grey w-20 border-b-0 rounded-none first:rounded-t-[5px] first:rounded-b-none first:border-b-0'>Share</button>
+                        <button onClick={doReply} className='text-primary-dark-grey px-3 py-2 text-left bg-[#FFFFFF] border border-solid border-primary-light-grey w-20 last:rounded-t-none last:rounded-b-[5px]'>Reply</button>
+                    </div>
                     {/* <div ref={setArrowElement} style={styles.arrow} /> */}
                 </div>
             )}

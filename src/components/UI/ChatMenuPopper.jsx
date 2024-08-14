@@ -34,7 +34,7 @@ function ChatMenuPopper({ isYou }) {
 
     return (
         <>
-            <div className='p-1 cursor-pointer' onClick={() => setMenuOpen(true)}>
+            <div className='p-1 cursor-pointer min-w-[20px]' onClick={() => setMenuOpen(true)}>
                 <img ref={setReferenceElement} className='w-[12px]' src={menuToggler} alt="menu icon" />
             </div>
 

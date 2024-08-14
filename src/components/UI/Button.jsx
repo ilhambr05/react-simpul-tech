@@ -1,7 +1,7 @@
-function Button(props) {
+function Button({type="button", addClass, children}) {
     return (
-        <button className="px-[16px] py-[8px] rounded-[5px] bg-primary-blue text-[#FFFFFF]" {...props}>
-            {props.children}
+        <button type={type} className={`px-[16px] py-[8px] rounded-[5px] bg-primary-blue text-[#FFFFFF] ${addClass}`}>
+            {children}
         </button>
     );
 }

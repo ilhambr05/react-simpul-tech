@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { usePopper } from 'react-popper';
 import menuToggler from '../../assets/icons/UI/menu-toggler.png'
 
-function ChatMenuPopper({ isYou }) {
+function ChatMenuPopper({ isYou, chatData, handleReplyMessage }) {
     const [referenceElement, setReferenceElement] = useState(null);
     const [popperElement, setPopperElement] = useState(null);
     const [arrowElement, setArrowElement] = useState(null);
@@ -32,7 +32,8 @@ function ChatMenuPopper({ isYou }) {
         // setMenuOpen(false);
     }
     function doReply() {
-        alert('Do Reply');
+        // alert('Do Reply');
+        handleReplyMessage(chatData);
         // setMenuOpen(false);
     }
 
@@ -43,7 +44,7 @@ function ChatMenuPopper({ isYou }) {
             </div>
 
             {menuOpen && (
-                <div className='absolute top-0 left-0 w-screen h-screen bg-black/50 z-0'>
+                <div className='absolute top-0 left-0 w-screen h-screen bg-black/50 z-0' onClick={() => setMenuOpen(false)}>
                     <div className="flex flex-col z-10" ref={setPopperElement} style={styles.popper} {...attributes.popper} onMouseLeave={() => hideMenu()}>
                         {
                             isYou &&

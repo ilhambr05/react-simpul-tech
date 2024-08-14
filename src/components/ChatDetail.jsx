@@ -14,9 +14,10 @@ import Connecting from './UI/Connecting';
 import { getDateTime } from '../utils/date';
 import { fetchChatById } from '../services/chat';
 
+const yourUserID = parseInt(import.meta.env.VITE_YOUR_USER_ID);
+
 function generateParticipantsColorData(participants) {
     let generatedParticipantsData = {};
-    const yourUserID = 111;
 
     // purple is reserved for you
     const textColors = [
@@ -57,6 +58,7 @@ function ChatDetail({ chatID, setChatDetailId }) {
     const [isConnecting, setIsConnecting] = useState(true);
     const [isNewMessageNotifVisible, setIsNewMessageNotifVisible] = useState(undefined);
     const [newMessage, setNewMessage] = useState("");
+    const [replyMessage, setReplyMessage] = useState(undefined);
     const [error, setError] = useState(false);
 
     const chatContainerRef = useRef();
@@ -105,9 +107,9 @@ function ChatDetail({ chatID, setChatDetailId }) {
         }
 
         // because of the limitation endpoint from the mock API service we have to do it this way
-        if ([1,999].includes(chatID)) {
+        if ([1, 999].includes(chatID)) {
             doFetch();
-        }else{
+        } else {
             fetchDummy(chatID);
         }
     }, [chatID]);
@@ -127,6 +129,11 @@ function ChatDetail({ chatID, setChatDetailId }) {
 
     function changeNewMessage(event) {
         setNewMessage(event.target.value);
+    }
+
+    function handleReplyMessage(msgData) {
+        newMessagesTextRef.current.focus();
+        setReplyMessage(msgData);
     }
 
     function checkNewMessageNotifVisible(event) {
@@ -160,24 +167,30 @@ function ChatDetail({ chatID, setChatDetailId }) {
                 const chatMsg = newMessage;
                 const timestampNow = new Date().getTime();
                 const timeNow = getDateTime(timestampNow)?.formattedTime;
+                let newMessageData = {
+                    messageID: prevChatDetail.messages.length + 1,
+                    content: chatMsg,
+                    timestamp: timestampNow,
+                    senderID: yourUserID,
+                    senderName: "Ilham",
+                    time: timeNow
+                };
+
+                if (replyMessage) {
+                    newMessageData["replyData"] = replyMessage;
+                }
 
                 return {
                     ...prevChatDetail,
                     timestampUserLastSeenChat: timestampNow,
                     messages: [
-                        {
-                            messageID: prevChatDetail.messages.length + 1,
-                            content: chatMsg,
-                            timestamp: timestampNow,
-                            senderID: 111,
-                            senderName: "Ilham",
-                            time: timeNow,
-                        },
+                        newMessageData,
                         ...prevChatDetail.messages
                     ],
                 };
             });
 
+            setReplyMessage(undefined);
             inputEl.focus();
         }
 
@@ -213,9 +226,8 @@ function ChatDetail({ chatID, setChatDetailId }) {
                 {/* <ChatDivider>Today, 01 January 2024</ChatDivider> */}
                 {
                     chatDetail?.messages?.map((chat, index) => {
-                        const yourUserID = 111;
                         // last message = first index
-                        const isLastMessageCreatedByYou = chat.senderID === yourUserID && index === 0;
+                        const isLastMessageCreatedByYou = chat.senderID == yourUserID && index === 0;
                         // console.log({ isLastMessageCreatedByYou })
 
                         const newChatDateDivider = new Date(chat.timestamp).toDateString();
@@ -239,7 +251,7 @@ function ChatDetail({ chatID, setChatDetailId }) {
                         }
                         return (
                             <div key={index}>
-                                <ChatBubble key={`${index}-${chat.id}`} chatData={chat} participantsData={participantsData}>{chat.content}</ChatBubble>
+                                <ChatBubble key={`${index}-${chat.id}`} chatData={chat} participantsData={participantsData} handleReplyMessage={handleReplyMessage}>{chat.content}</ChatBubble>
                                 {newMessagesNotifComponent}
                                 {dateDividerComponent}
                             </div>
@@ -263,8 +275,24 @@ function ChatDetail({ chatID, setChatDetailId }) {
 
             {/* footer */}
             <form onSubmit={sendNewChat} className="flex flex-row gap-[15px]" >
-                <TypeBar ref={newMessagesTextRef} placeholder="Type a message..." />
-                <Button type="submit">Send</Button>
+                <div className='flex-grow'>
+
+                    {replyMessage &&
+                        <div className='w-full relative bottom-0'>
+                            <div className='w-full absolute bottom-0 p-[15px] bg-primary-light-grey border-primary-grey border border-b-0 rounded-t-[5px] font-[14px]'>
+                                <img src={closeIcon} className='cursor-pointer absolute right-2 top-2 h-[10px]' onClick={() => setReplyMessage(undefined)}></img>
+                                <div className='font-bold'>
+                                    Replying To {replyMessage?.senderName}
+                                </div>
+                                {replyMessage?.content}
+                            </div>
+                        </div>
+                    }
+                    <TypeBar ref={newMessagesTextRef} addClass={`w-full ${replyMessage ? "!rounded-t-none" : ""}`} placeholder="Type a message..." />
+                </div>
+                <div className="flex">
+                    <Button type="submit" addClass={`h-[48px] self-end`}>Send</Button>
+                </div>
             </form>
         </>
     )

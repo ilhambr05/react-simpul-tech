@@ -16,6 +16,12 @@ const chatSummary = [
                 icon: personLogo,
                 styleClass: "bg-primary-blue",
             },
+            {
+                userID: 111,
+                name: "Ilham",
+                icon: personLogo,
+                styleClass: "bg-indicator-orange",
+            },
         ],
         content: {
             title: "fastVisa Support",
@@ -128,6 +134,12 @@ const chatSummary = [
                 icon: personDarkLogo,
                 styleClass: "bg-primary-light-grey",
             },
+            {
+                userID: 111,
+                name: "Ilham",
+                icon: personLogo,
+                styleClass: "bg-indicator-orange",
+            },
         ],
         content: {
             title: "Dummy For Scroll Test",
@@ -151,6 +163,12 @@ const chatSummary = [
                 name: "Jane Smith",
                 icon: personDarkLogo,
                 styleClass: "bg-primary-light-grey",
+            },
+            {
+                userID: 111,
+                name: "Ilham",
+                icon: personLogo,
+                styleClass: "bg-indicator-orange",
             },
         ],
         content: {
@@ -176,6 +194,12 @@ const chatSummary = [
                 icon: personDarkLogo,
                 styleClass: "bg-primary-light-grey",
             },
+            {
+                userID: 111,
+                name: "Ilham",
+                icon: personLogo,
+                styleClass: "bg-indicator-orange",
+            },
         ],
         content: {
             title: "Dummy For Scroll Test",
@@ -200,6 +224,12 @@ const chatSummary = [
                 icon: personDarkLogo,
                 styleClass: "bg-primary-light-grey",
             },
+            {
+                userID: 111,
+                name: "Ilham",
+                icon: personLogo,
+                styleClass: "bg-indicator-orange",
+            },
         ],
         content: {
             title: "Dummy For Scroll Test",
@@ -223,6 +253,12 @@ const chatSummary = [
                 name: "Jane Smith",
                 icon: personDarkLogo,
                 styleClass: "bg-primary-light-grey",
+            },
+            {
+                userID: 111,
+                name: "Ilham",
+                icon: personLogo,
+                styleClass: "bg-indicator-orange",
             },
         ],
         content: {

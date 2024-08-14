@@ -12,7 +12,7 @@ import ChatDivider from './UI/chatDivider';
 import TypeBar from './UI/TypeBar';
 import Connecting from './UI/Connecting';
 import { getDateTime } from '../utils/date';
-import chatSupport from '../dummy/chatSupport';
+import { fetchChatById } from '../services/chat';
 
 function generateParticipantsColorData(participants) {
     let generatedParticipantsData = {};
@@ -57,6 +57,7 @@ function ChatDetail({ chatID, setChatDetailId }) {
     const [isConnecting, setIsConnecting] = useState(true);
     const [isNewMessageNotifVisible, setIsNewMessageNotifVisible] = useState(undefined);
     const [newMessage, setNewMessage] = useState("");
+    const [error, setError] = useState(false);
 
     const chatContainerRef = useRef();
     const newMessagesNotifRef = useRef();
@@ -65,8 +66,8 @@ function ChatDetail({ chatID, setChatDetailId }) {
     let chatDateDivider = chatDetail.length ? new Date(chatDetail?.messages[0]?.timestamp).toDateString() : null;
     let chatLastSeenTimestamp = chatDetail.timestampUserLastSeenChat;
 
-    useEffect(() => {
-        setChatDetail(dummyChatDetailIndexes[chatID] || dummyChatDetail1);
+    function fetchDummy(id) {
+        setChatDetail(dummyChatDetailIndexes[id] || dummyChatDetail1);
         setIsConnecting(true);
         newMessagesTextRef.current.focus();
 
@@ -74,6 +75,41 @@ function ChatDetail({ chatID, setChatDetailId }) {
         setTimeout(() => {
             setIsConnecting(false);
         }, 1000);
+    }
+
+    // useEffect(() => {
+    //     fetchDummy(chatID);
+    // }, [chatID]);
+
+    useEffect(() => {
+        async function doFetch() {
+            setIsConnecting(true);
+
+            try {
+                const fetchData = await fetchChatById(chatID);
+                // console.log(fetchData);
+                setChatDetail(fetchData);
+                newMessagesTextRef.current.focus();
+
+                // mock connecting
+                setTimeout(() => {
+                    setIsConnecting(false);
+                }, 1000);
+            } catch (error) {
+                setError({
+                    message:
+                        error.message || 'Could not fetch data, please try again later.',
+                });
+                setIsConnecting(false);
+            }
+        }
+
+        // because of the limitation endpoint from the mock API service we have to do it this way
+        if ([1,999].includes(chatID)) {
+            doFetch();
+        }else{
+            fetchDummy(chatID);
+        }
     }, [chatID]);
 
     // event handlers
@@ -94,7 +130,7 @@ function ChatDetail({ chatID, setChatDetailId }) {
     }
 
     function checkNewMessageNotifVisible(event) {
-        if(!newMessagesNotifRef?.current){
+        if (!newMessagesNotifRef?.current) {
             return;
         }
         const chatContainerEl = event.target;
@@ -213,6 +249,10 @@ function ChatDetail({ chatID, setChatDetailId }) {
                 {/* first message date */}
                 {chatDetail?.messages?.length > 0 &&
                     <ChatDivider>{chatDateDivider}</ChatDivider>
+                }
+                {
+                    error &&
+                    <h3>{error.message}</h3>
                 }
             </div>
 

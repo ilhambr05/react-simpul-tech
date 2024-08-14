@@ -8,6 +8,7 @@ import editInactiveIcon from '../assets/icons/UI/task-edit-inactive.png';
 import TaskDelete from "./UI/TaskDelete";
 import TextAreaAuto from "./UI/TextAreaAuto";
 import TypeBar from "./UI/TypeBar";
+import TaskTags from "./UI/TaskTags";
 
 function TaskItem({ task=[], isNewTask = false }) {
     const [isDone, setIsDone] = useState(task.isDone || false);
@@ -100,6 +101,10 @@ function TaskItem({ task=[], isNewTask = false }) {
                                         : <p>{taskDescText || "No Description"}</p>
                                 }
                             </div>
+                        </div>
+                        <div>
+                            {/* task tags */}
+                            <TaskTags />
                         </div>
                     </div>
                 </div>

@@ -28,7 +28,14 @@ export default {
       "chat-purple-darker": "#9B51E0",
       "chat-green": "#D2F2EA",
       "chat-green-darker": "#43B78D",
-      "stickers-light-blue": "#E9F3FF"
+      "stickers-light-blue": "#E9F3FF",
+      "stickers-dark-blue": "#9DD0ED",
+      "stickers-light-brown": "#FDCFA4",
+      "stickers-light-yellow": "#F9E9C3",
+      "stickers-dark-green": "#AFEBDB",
+      "stickers-light-green": "#CBF1C2",
+      "stickers-dark-purple": "#CFCEF9",
+      "stickers-light-purple": "#F9E0FD",
     }
   },
   plugins: [],

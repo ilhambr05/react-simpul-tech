@@ -1,22 +1,31 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Checkbox from "./UI/Checkbox";
 import expandIcon from '../assets/icons/UI/expand.png';
-import collapseIcon from '../assets/icons/UI/collapse.png';
 import dateActiveIcon from '../assets/icons/UI/task-date-active.png';
 import dateInactiveIcon from '../assets/icons/UI/task-date-inactive.png';
 import editActiveIcon from '../assets/icons/UI/task-edit-active.png';
 import editInactiveIcon from '../assets/icons/UI/task-edit-inactive.png';
 import TaskDelete from "./UI/TaskDelete";
 import TextAreaAuto from "./UI/TextAreaAuto";
+import TypeBar from "./UI/TypeBar";
 
-function TaskItem({ task }) {
-    const [isDone, setIsDone] = useState(task.isDone);
-    const [isExpanded, setIsExpanded] = useState(false);
-    const [taskDate, setTaskDate] = useState(task.description);
-    const [taskDescText, setTaskDescText] = useState(task.description);
+function TaskItem({ task=[], isNewTask = false }) {
+    const [isDone, setIsDone] = useState(task.isDone || false);
     const [isEditMode, setIsEditMode] = useState(false);
+    const [isExpanded, setIsExpanded] = useState(isNewTask);
 
-    // const textAreaRef = useRef();
+    // inputs
+    const [taskTitle, setTaskTitle] = useState(task.title || '');
+    const [taskDate, setTaskDate] = useState(task.dueDate || '');
+    const [taskDescText, setTaskDescText] = useState(task.description || '');
+
+    const newTaskTitle = useRef();
+
+    useEffect(() => {
+        if(isNewTask && newTaskTitle.current) {
+            newTaskTitle.current.focus();
+        }
+    }, [isNewTask]);
 
     function handleEditMode(newEditMode) {
         setIsEditMode(newEditMode);
@@ -35,9 +44,17 @@ function TaskItem({ task }) {
                 <div className="flex flex-col flex-grow">
                     {/* header */}
                     <div className="flex flex-row gap-[15px]">
-                        <div className={`flex-grow font-bold text-primary-dark-grey text-[16px] ${isDone ? "line-through text-primary-grey" : ""}`}>{task.title}</div>
-                        <div className="text-indicator-red text-[14px]">10 Days Left</div>
-                        <div className="text-primary-dark-grey text-[14px]">{task.dueTime}</div>
+                        {
+                            isNewTask
+                                ?
+                                <TypeBar ref={newTaskTitle} placeholder="Type Task Title" value={taskTitle} onChange={(e) => setTaskTitle(e.target.value)} />
+                                :
+                                <>
+                                    <div className={`flex-grow font-bold text-primary-dark-grey text-[16px] ${isDone ? "line-through text-primary-grey" : ""}`}>{task.title}</div>
+                                    <div className="text-indicator-red text-[14px]">{task.daysRemain} Day{task.daysRemain > 1 ? 's' : ''} Left</div>
+                                    <div className="text-primary-dark-grey text-[14px]">{task.dueDate}</div>
+                                </>
+                        }
                         <div className="flex flex-row gap-[5px]">
                             <div className="flex justify-center cursor-pointer p-[5px] min-w-[20px]"
                                 onClick={() => { setIsExpanded(!isExpanded) }}>

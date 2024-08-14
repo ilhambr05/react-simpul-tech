@@ -25,8 +25,8 @@ function TaskDelete() {
 
     return (
         <>
-            <div ref={setReferenceElement} className='flex flex-row p-[5px] cursor-pointer min-w-[20px]' onClick={() => setMenuOpen(!menuOpen)}>
-                <img className='w-[15px]' src={menuToggler} alt="toggler icon" />
+            <div className='p-[5px] cursor-pointer min-w-[20px]' onClick={() => setMenuOpen(!menuOpen)}>
+                <img  ref={setReferenceElement} className='w-[15px]' src={menuToggler} alt="toggler icon" />
             </div>
 
             {menuOpen && (

@@ -1,11 +1,11 @@
 import Button from "./Button";
 import TaskFilter from "./TaskFilter";
 
-function TaskHeader() {
+function TaskHeader({isMakingNewTask, setIsMakingNewTask}) {
     return (
         <div className="flex flex-row items-center justify-between gap-[10px]">
             <TaskFilter/>
-            <Button>New Task</Button>
+            <Button onClick={() => setIsMakingNewTask(!isMakingNewTask)}>New Task</Button>
         </div>
     )
 }

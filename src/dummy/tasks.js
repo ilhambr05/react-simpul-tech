@@ -23,6 +23,38 @@ const tasks = [
     dueDate: "2024-02-05",
     daysRemain: "7",
   },
+  {
+    isDone: true,
+    title: "Task 4: Plan Project",
+    description:
+      "Create a detailed plan for the upcoming project, including setting milestones, assigning tasks, and establishing a timeline. This will involve researching industry trends, analyzing data, and collaborating with team members to ensure a comprehensive plan.",
+    dueDate: "2024-02-05",
+    daysRemain: "7",
+  },
+  {
+    isDone: true,
+    title: "Task 4: Plan Project",
+    description:
+      "Create a detailed plan for the upcoming project, including setting milestones, assigning tasks, and establishing a timeline. This will involve researching industry trends, analyzing data, and collaborating with team members to ensure a comprehensive plan.",
+    dueDate: "2024-02-05",
+    daysRemain: "7",
+  },
+  {
+    isDone: true,
+    title: "Task 4: Plan Project",
+    description:
+      "Create a detailed plan for the upcoming project, including setting milestones, assigning tasks, and establishing a timeline. This will involve researching industry trends, analyzing data, and collaborating with team members to ensure a comprehensive plan.",
+    dueDate: "2024-02-05",
+    daysRemain: "7",
+  },
+  {
+    isDone: true,
+    title: "Task 4: Plan Project",
+    description:
+      "Create a detailed plan for the upcoming project, including setting milestones, assigning tasks, and establishing a timeline. This will involve researching industry trends, analyzing data, and collaborating with team members to ensure a comprehensive plan.",
+    dueDate: "2024-02-05",
+    daysRemain: "7",
+  },
 ];
 
 export default tasks;

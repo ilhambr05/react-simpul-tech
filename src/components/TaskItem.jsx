@@ -12,6 +12,7 @@ import TextAreaAuto from "./UI/TextAreaAuto";
 function TaskItem({ task }) {
     const [isDone, setIsDone] = useState(task.isDone);
     const [isExpanded, setIsExpanded] = useState(false);
+    const [taskDate, setTaskDate] = useState(task.description);
     const [taskDescText, setTaskDescText] = useState(task.description);
     const [isEditMode, setIsEditMode] = useState(false);
 
@@ -55,20 +56,22 @@ function TaskItem({ task }) {
                             {/* date selector */}
                             <div className="w-[20px]">
                                 <img
-                                    src={dateInactiveIcon}
-                                    // src={isExpanded ? dateInactiveIcon : dateActiveIcon}
+                                    // src={dateInactiveIcon}
+                                    src={taskDate ? dateActiveIcon : dateInactiveIcon}
                                     alt="date-icon"
                                 // className="h-[auto] w-[20px]"
                                 />
                             </div>
-                            <input type="date" className="text-primary-dark-grey border rounded-[5px] border-solid border-primary-grey py-[8px] px-[12px] min-w-[200px]"></input>
+                            <input type="date" placeholder="dd-mm-yyyy" value={taskDate} onChange={e => setTaskDate(e.target.value)}
+                                className="text-primary-dark-grey border rounded-[5px] border-solid border-primary-grey py-[8px] px-[12px] min-w-[200px]"></input>
                         </div>
                         <div className="flex flex-row gap-[15px]">
                             {/* description input */}
-                            <div className="cursor-pointer pt-[5px]" onClick={() => { handleEditMode(!isEditMode) }}>
+                            <div className="cursor-pointer" onClick={() => { handleEditMode(!isEditMode) }}>
                                 <img
                                     className="w-[20px] max-w-[unset]"
-                                    src={isEditMode ? editActiveIcon : editInactiveIcon}
+                                    // src={editActiveIcon}
+                                    src={taskDescText ? editActiveIcon : editInactiveIcon}
                                     alt="edit-icon"
                                 />
                             </div>
@@ -77,7 +80,7 @@ function TaskItem({ task }) {
                                     isEditMode
                                         ?
                                         <TextAreaAuto value={taskDescText} onTextChange={setTaskDescText}></TextAreaAuto>
-                                        : <p>{taskDescText}</p>
+                                        : <p>{taskDescText || "No Description"}</p>
                                 }
                             </div>
                         </div>

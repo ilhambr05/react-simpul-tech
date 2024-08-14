@@ -31,7 +31,8 @@ function TaskItem({ task }) {
         <div className="flex py-[15px] border-b-2 border-solid border-primary-grey">
             <div className="flex flex-row flex-grow gap-[20px]">
                 <Checkbox isChecked={isDone} onChange={handleOnCheck} />
-                <div className="flex flex-col flex-grow gap-[15px]">
+                <div className="flex flex-col flex-grow">
+                    {/* header */}
                     <div className="flex flex-row gap-[15px]">
                         <div className={`flex-grow font-bold text-primary-dark-grey text-[16px] ${isDone ? "line-through text-primary-grey" : ""}`}>{task.title}</div>
                         <div className="text-indicator-red text-[14px]">10 Days Left</div>
@@ -40,40 +41,45 @@ function TaskItem({ task }) {
                             <div className="flex justify-center cursor-pointer p-[5px] min-w-[20px]"
                                 onClick={() => { setIsExpanded(!isExpanded) }}>
                                 <img
-                                    src={isExpanded ? collapseIcon : expandIcon}
+                                    src={expandIcon}
                                     alt="collapse/expand"
-                                    className="w-[11px] h-[8px] mt-[2px]"
+                                    className={`w-[11px] h-[8px] mt-[2px] transition-all duration-500 ${isExpanded ? "rotate-180" : ""}`}
                                 />
                             </div>
                             <TaskDelete />
                         </div>
                     </div>
-                    <div className="flex items-center gap-[15px]">
-                        <div className="w-[20px]">
-
-                            <img
-                                src={isExpanded ? dateInactiveIcon : dateActiveIcon}
-                                alt="date-icon"
-                            // className="h-[auto] w-[20px]"
-                            />
+                    {/* expandable content */}
+                    <div className={`flex flex-col gap-[15px] overflow-hidden transition-all duration-500 ${isExpanded ? "max-h-[500px]" : "max-h-0"}`}>
+                        <div className="flex items-center gap-[15px] mt-[15px]">
+                            {/* date selector */}
+                            <div className="w-[20px]">
+                                <img
+                                    src={dateInactiveIcon}
+                                    // src={isExpanded ? dateInactiveIcon : dateActiveIcon}
+                                    alt="date-icon"
+                                // className="h-[auto] w-[20px]"
+                                />
+                            </div>
+                            <input type="date" className="text-primary-dark-grey border rounded-[5px] border-solid border-primary-grey py-[8px] px-[12px] min-w-[200px]"></input>
                         </div>
-                        <input type="date" className="text-primary-dark-grey border rounded-[5px] border-solid border-primary-grey py-[8px] px-[12px] min-w-[200px]"></input>
-                    </div>
-                    <div className="flex flex-row gap-[15px]">
-                        <div className="cursor-pointer pt-[5px]" onClick={() => { handleEditMode(!isEditMode) }}>
-                            <img
-                                className="w-[20px] max-w-[unset]"
-                                src={isEditMode ? editActiveIcon : editInactiveIcon}
-                                alt="edit-icon"
-                            />
-                        </div>
-                        <div className="cursor-pointer flex-grow" onClick={() => { handleEditMode(true) }}>
-                            {
-                                isEditMode
-                                    ?
-                                    <TextAreaAuto value={taskDescText} onTextChange={setTaskDescText}></TextAreaAuto>
-                                    : <p>{taskDescText}</p>
-                            }
+                        <div className="flex flex-row gap-[15px]">
+                            {/* description input */}
+                            <div className="cursor-pointer pt-[5px]" onClick={() => { handleEditMode(!isEditMode) }}>
+                                <img
+                                    className="w-[20px] max-w-[unset]"
+                                    src={isEditMode ? editActiveIcon : editInactiveIcon}
+                                    alt="edit-icon"
+                                />
+                            </div>
+                            <div className="cursor-pointer flex-grow" onClick={() => { handleEditMode(true) }}>
+                                {
+                                    isEditMode
+                                        ?
+                                        <TextAreaAuto value={taskDescText} onTextChange={setTaskDescText}></TextAreaAuto>
+                                        : <p>{taskDescText}</p>
+                                }
+                            </div>
                         </div>
                     </div>
                 </div>

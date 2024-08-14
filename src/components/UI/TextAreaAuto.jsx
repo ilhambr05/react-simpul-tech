@@ -4,21 +4,26 @@ function TextAreaAuto({ value, onTextChange }) {
     const textAreaRef = useRef();
     function handleChange(event) {
         const textEl = event.target;
-        textEl.style.height = 'auto';
-        textEl.style.height = textEl.scrollHeight + 'px';
-        onTextChange(textEl.value)
-        console.log(textEl.scrollHeight)
-        console.log(textEl.value)
+        if (textEl) {
+            handleHeight(textEl);
+            onTextChange(textEl.value);
+        }
+    }
+
+    function handleHeight(element) {
+        element.style.height = "0px";
+        element.style.height = `${element.scrollHeight}px`;
     }
 
     // event handlers
     useEffect(() => {
         const textEl = textAreaRef.current;
 
-        textEl.addEventListener('change', handleChange);
-        return () => {
-            textEl.removeEventListener('change', handleChange);
-        };
+        // set initial height on render
+        if (textEl) {
+            textEl.focus();
+            handleHeight(textEl);
+        }
     }, []);
 
     return (

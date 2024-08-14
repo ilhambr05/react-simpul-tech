@@ -15,6 +15,13 @@ function TaskItem({ task }) {
     const [taskDescText, setTaskDescText] = useState(task.description);
     const [isEditMode, setIsEditMode] = useState(false);
 
+    // const textAreaRef = useRef();
+
+    function handleEditMode(newEditMode) {
+        setIsEditMode(newEditMode);
+        // others
+    }
+
     function handleOnCheck() {
         setIsDone(!isDone);
         // others
@@ -44,27 +51,28 @@ function TaskItem({ task }) {
                     <div className="flex items-center gap-[15px]">
                         <div className="w-[20px]">
 
-                        <img
-                            src={isExpanded ? dateInactiveIcon : dateActiveIcon}
-                            alt="date-icon"
+                            <img
+                                src={isExpanded ? dateInactiveIcon : dateActiveIcon}
+                                alt="date-icon"
                             // className="h-[auto] w-[20px]"
-                        />
+                            />
                         </div>
                         <input type="date" className="text-primary-dark-grey border rounded-[5px] border-solid border-primary-grey py-[8px] px-[12px] min-w-[200px]"></input>
                     </div>
                     <div className="flex flex-row gap-[15px]">
-                        <div className="cursor-pointer pt-[5px]" onClick={() => { setIsEditMode(!isEditMode) }}>
+                        <div className="cursor-pointer pt-[5px]" onClick={() => { handleEditMode(!isEditMode) }}>
                             <img
                                 className="w-[20px] max-w-[unset]"
                                 src={isEditMode ? editActiveIcon : editInactiveIcon}
                                 alt="edit-icon"
                             />
                         </div>
-                        <div className="cursor-pointer flex-grow" onClick={() => { setIsEditMode(true) }}>
+                        <div className="cursor-pointer flex-grow" onClick={() => { handleEditMode(true) }}>
                             {
                                 isEditMode
-                                    ? <TextAreaAuto value={taskDescText} onTextChange={setTaskDescText}></TextAreaAuto>
-                                    : <div>{taskDescText}</div>
+                                    ?
+                                    <TextAreaAuto value={taskDescText} onTextChange={setTaskDescText}></TextAreaAuto>
+                                    : <p>{taskDescText}</p>
                             }
                         </div>
                     </div>

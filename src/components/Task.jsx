@@ -62,8 +62,6 @@ function Task() {
                                 );
                             })
                         }
-                        {/* <TaskItem task={{ isDone: false, title: 'task.title', description: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Obcaecati reiciendis, libero laborum deleniti, neque porro laudantium aliquid cum nemo, mollitia recusandae incidunt natus saepe tenetur perspiciatis? Ea repellendus non mollitia!', dueDate: '2024-01-30', daysRemain: '2' }} /> */}
-                        {/* <TaskItem task={{ isDone: false, title: 'task.title', description: '', dueDate: '2024-01-29', daysRemain: '1' }} /> */}
                     </div>
             }
         </>

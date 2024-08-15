@@ -19,6 +19,7 @@ function TaskItem({ task=[], isNewTask = false }) {
     const [taskTitle, setTaskTitle] = useState(task.title || '');
     const [taskDate, setTaskDate] = useState(task.dueDate || '');
     const [taskDescText, setTaskDescText] = useState(task.description || '');
+    const [activeTags, setActiveTags] = useState(task.tags || []);
 
     const newTaskTitle = useRef();
 
@@ -35,6 +36,15 @@ function TaskItem({ task=[], isNewTask = false }) {
 
     function handleOnCheck() {
         setIsDone(!isDone);
+        // others
+    }
+
+    function handleActiveTags(tagName) {
+        if(activeTags.includes(tagName)) {
+            setActiveTags(activeTags.filter(tag => tag !== tagName));
+        } else {
+            setActiveTags([...activeTags, tagName]);
+        }
         // others
     }
 
@@ -104,7 +114,7 @@ function TaskItem({ task=[], isNewTask = false }) {
                         </div>
                         <div>
                             {/* task tags */}
-                            <TaskTags />
+                            <TaskTags activeTags={activeTags} setActiveTags={handleActiveTags} />
                         </div>
                     </div>
                 </div>

@@ -41,7 +41,6 @@ function TaskTags({ activeTags, setActiveTags }) {
         };
         setActiveTagList(activeTagData);
         setNonactiveTagList(nonactiveTagData);
-        console.log({ activeTagData, nonactiveTagData });
     }, [activeTags]);
 
     const { styles, attributes } = usePopper(referenceElement, popperElement, {
@@ -55,14 +54,14 @@ function TaskTags({ activeTags, setActiveTags }) {
 
     return (
         <>
-            <div className='flex flex-row items-center gap-[15px]'>
+            <div className='flex flex-row items-center gap-[15px] cursor-pointer' onClick={() => setMenuOpen(!menuOpen)} >
                 <div className='min-w-[20px]'>
-                    <img ref={setReferenceElement} className='w-[20px] cursor-pointer' src={tagIcon} alt="Tag icon" onClick={() => setMenuOpen(!menuOpen)} />
+                    <img ref={setReferenceElement} className='w-[20px]' src={tagIcon} alt="Tag icon"/>
                 </div>
                 <div className='flex flex-grow flex-row flex-wrap gap-[10px] p-[10px] mr-[15px] min-h-[48px] bg-[#F9F9F9] rounded-[5px]'>
                     {/* Tags active */}
                     {Object.keys(activeTagList).map((tagName, index) => (
-                        <TagItem key={index} tagName={tagName} bgClassName={tags[tagName]} setActiveTags={setActiveTags} />
+                        <TagItem key={index} tagName={tagName} bgClassName={tags[tagName]}/>
                     ))}
                 </div>
             </div>

@@ -92,9 +92,9 @@ function TaskItem({ task = [], isNewTask = false }) {
                             </div>
                             <div>
                                 <input type="date" placeholder="dd-mm-yyyy" value={taskDate} onChange={e => setTaskDate(e.target.value)}
-                                    className="text-primary-dark-grey border rounded-[5px] border-solid border-primary-grey py-[8px] px-[12px] min-w-[200px]"></input>
+                                    className="text-primary-dark-grey border rounded-[5px] border-solid border-primary-grey py-[8px] px-[12px] min-w-[200px] focus-visible:outline-none"></input>
                                 <input type="date" placeholder="dd-mm-yyyy" value={taskDate} onChange={e => setTaskDate(e.target.value)}
-                                    className="w-[33px] -ml-[33px] text-primary-dark-grey border-r rounded-[5px] py-[8px] pr-[12px]"></input>
+                                    className="w-[33px] -ml-[33px] text-primary-dark-grey border-r rounded-[5px] py-[8px] pr-[12px] focus-visible:outline-none"></input>
                             </div>
                         </div>
                         <div className="flex flex-row gap-[15px]">

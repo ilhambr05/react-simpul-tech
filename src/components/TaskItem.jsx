@@ -49,7 +49,7 @@ function TaskItem({ task = [], isNewTask = false }) {
     }
 
     return (
-        <div className="flex py-[15px] border-b-2 border-solid border-primary-grey">
+        <div className="flex mb-[22px] pb-[22px] border-b-2 border-solid border-primary-grey">
             <div className="flex flex-row flex-grow gap-[20px]">
                 <Checkbox isChecked={isDone} onChange={handleOnCheck} />
                 <div className="flex flex-col flex-grow">
@@ -62,8 +62,8 @@ function TaskItem({ task = [], isNewTask = false }) {
                                 :
                                 <>
                                     <div className={`flex-grow font-bold text-primary-dark-grey text-[16px] ${isDone ? "line-through text-primary-grey" : ""}`}>{task.title}</div>
-                                    <div className="text-indicator-red text-[14px]">{task.daysRemain} Day{task.daysRemain > 1 ? 's' : ''} Left</div>
-                                    <div className="text-primary-dark-grey text-[14px]">{task.dueDate}</div>
+                                    <div className="text-indicator-red text-[14px] min-w-[85px]">{task.daysRemain} Day{task.daysRemain > 1 ? 's' : ''} Left</div>
+                                    <div className="text-primary-dark-grey text-[14px] min-w-[80px]">{task.dueDate}</div>
                                 </>
                         }
                         <div className="flex flex-row gap-[5px]">
@@ -75,7 +75,6 @@ function TaskItem({ task = [], isNewTask = false }) {
                                     className={`w-[11px] h-[8px] mt-[2px] transition-all duration-500 ${isExpanded ? "rotate-180" : ""}`}
                                 />
                             </div>
-                            <TaskDelete />
                         </div>
                     </div>
                     {/* expandable content */}

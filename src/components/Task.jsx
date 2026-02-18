@@ -48,7 +48,7 @@ function Task() {
                 isLoading
                     ? <Loader>Loading Task List ...</Loader>
                     :
-                    <div className="overflow-y-auto py-[15px]">
+                    <div className="overflow-y-auto mt-[22px]">
                         {
                             isMakingNewTask && <TaskItem isNewTask={true} />
                         }

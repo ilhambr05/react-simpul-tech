@@ -61,10 +61,10 @@ function ChatSummary({ setChatDetailId }) {
                                 :
                                 chatSummary.map((summary, index) => {
                                     return (
-                                        <div key={index} className="flex flex-row py-[22px] text-[14px] border-b-primary-dark border-b-[1px] border-solid 
-                            last:border-none cursor-pointer hover:bg-[#D2D2D22B]"
+                                        <div key={index} className="flex flex-row py-[22px] gap-[10px] text-[14px] border-b-primary-dark border-b-[1px] border-solid 
+                            last:border-none cursor-pointer"
                                             onClick={() => setChatDetailId(summary.id)}>
-                                            <div className="flex flex-row min-w-[50px] overflow-hidden mr-[10px]">
+                                            <div className="flex flex-row min-w-[50px] overflow-hidden">
                                                 {
                                                     summary.participants.map((user, index) => {
                                                         return (
@@ -78,24 +78,28 @@ function ChatSummary({ setChatDetailId }) {
                                                 }
                                             </div>
                                             <div className="flex flex-col text-primary-dark-grey">
-                                                <div className="text-[16px] font-bold text-primary-blue">
-                                                    {summary.content.title}
+                                                <div className="flex flex-row gap-[16px] items-center">
+                                                    <div className="text-[16px] font-bold text-primary-blue">
+                                                        {summary.content.title}
+                                                    </div>
+                                                    <span>{summary.content.dateTime}</span>
                                                 </div>
                                                 <div className="font-bold">
                                                     {summary.content.sender || "Sender"} :
                                                 </div>
-                                                <div className="grid">
-                                                    <div className="truncate">
-                                                        {summary.content.message}
+                                                <div className="flex flex-row gap-[10px] items-center">
+                                                    <div className="grid flex-1">
+                                                        <div className="truncate">
+                                                            {summary.content.message}
+                                                        </div>
+                                                    </div>
+                                                    <div className="min-w-[145px] flex flex-col justify-center">
+                                                        {
+                                                            summary.content.hasNewMessage &&
+                                                            <div className="rounded-full w-[10px] h-[10px] bg-indicator-red self-end"></div>
+                                                        }
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div className="min-w-[145px] ml-[20px] flex flex-col gap-[20px]">
-                                                {summary.content.dateTime}
-                                                {
-                                                    summary.content.hasNewMessage &&
-                                                    <div className="rounded-full w-[10px] h-[10px] bg-indicator-red self-center"></div>
-                                                }
                                             </div>
                                         </div>
                                     )
